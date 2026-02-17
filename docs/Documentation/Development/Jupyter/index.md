@@ -132,7 +132,7 @@ Before you get started, we recommend installing your own Jupyter inside of a con
 
 Internal (NLR) HPC users on the NLR VPN, or external users of the HPC VPN, may use the instructions below.
 
-External (non-NLR) HPC users may follow the same instructions, but please use `kestrel.nrel.gov` in place of `kestrel.hpc.nrel.gov`.
+External (non-NLR) HPC users may follow the same instructions, but please use `kestrel.nlr.gov` in place of `kestrel.hpc.nrel.gov`.
 
 ## Using a Compute Node to run Jupyter Notebooks
 

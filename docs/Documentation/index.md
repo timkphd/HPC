@@ -19,6 +19,6 @@ Please use the navigation bar on the left to explore the available documentation
 
 ### Other NLR Documentation Resources
 
-* The [NLR HPC Website](https://hpc.nrel.gov) is the home of Advanced Computing at NLR
+* The [NLR HPC Website](https://www.nlr.gov/hpc/) is the home of Advanced Computing at NLR
 * Our [Github Repository](https://github.com/NREL/HPC) for specific application examples, scripts, workshop content, the contributor guide, and more. 
 * The [gh-pages branch](https://github.com/NREL/HPC/tree/gh-pages) (this site) is also open for contribution.

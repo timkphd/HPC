@@ -10,7 +10,7 @@ In addition to standard ssh-only login nodes, Kestrel is also equipped with seve
 
 There are seven internal DAV nodes on Kestrel available only to NLR users on the NLR VPN, on campus, or via the [HPC VPN](https://www.nlr.gov/hpc/vpn-connection.html) that are accessible via round-robin at **kestrel-dav.hpc.nrel.gov**. The individual nodes are named kd1 through kd7.hpc.nrel.gov.
 
-There is also one node that is ONLY accessible by external (non-NLR) users available at **kestrel-dav.nrel.gov**. This address will connect to the node kd8, and requires both password and OTP for login. 
+There is also one node that is ONLY accessible by external (non-NLR) users available at **kestrel-dav.nlr.gov**. This address will connect to the node kd8, and requires both password and OTP for login. 
 
 All Kestrel DAV nodes have 104 CPU cores (2x 52-core Intel Xeon Sapphire Rapids CPUs), 256GB RAM, 2x 48GB NVIDIA A40 GPUs, and offer a Linux desktop (via FastX) with visualization capabilities, optional VirtualGL, and standard Linux terminal applications.
 
@@ -107,7 +107,7 @@ NLR users may use the web browser or the FastX desktop client. External users mu
 
     Give your profile a name and enter the settings...
 
-    Host: kestrel-dav.nrel.gov
+    Host: kestrel-dav.nlr.gov
 
     Port: 22
 

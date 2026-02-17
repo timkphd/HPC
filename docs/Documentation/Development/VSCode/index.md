@@ -12,7 +12,7 @@ You may then enter your HPC username and the address of an HPC system to connect
 
 * To connect to Kestrel from the NLR VPN, enter `username@kestrel.hpc.nrel.gov`, replacing "username" with your HPC user name.
 
-* To connect to Kestrel as an external collaborator, enter `username@kestrel.nrel.gov`, replacing "username" with your HPC user name.
+* To connect to Kestrel as an external collaborator, enter `username@kestrel.nlr.gov`, replacing "username" with your HPC user name.
 
 Enter your HPC password (or password and OTP code if external) and you will be connected to a login node. You may open a folder on the remote host to browse your home directory and select files to edit, and so on.
 
