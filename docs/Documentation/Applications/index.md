@@ -27,6 +27,7 @@ The following are packages that the NLR Computational Science Center supports:
 | [LBM CFD](./LBMcfd.md) | CFD Solvers based on the Lattice Boltzmann Method like M-Star and MARBLES |
 | [MACE](./mace.md) | MACE is a machine learning framework for developing interatomic potentials |
 | [MATLAB](./Matlab/index.md) | General technical computing framework | 
+| [NAMD](./namd.md) | GPU-accelerated parallel molecular dynamics for large biomolecular systems |
 | [OpenFAST/FAST.Farm](./openfast.md) | Software for wind turbine aero-servo-elastic calculations and wind farm load and performance analysis | 
 | [OpenFOAM](./openfoam.md) | Software for computational fluid dynamics | 
 | [PLEXOS](./Plexos/index.md) | Simulation software for modeling electric, gas, and water systems for optimizing energy markets | 
