@@ -3,7 +3,7 @@
 NAMD is developed by the Theoretical and Computational Biophysics Group at the University of Illinois Urbana-Champaign. It uses the Charm++ parallel programming model with an SMP (Symmetric Multi-Processing) runtime, enabling efficient scaling across both CPU cores and GPU accelerators. Common use cases include protein folding, membrane dynamics, and free energy calculations. For more information and documentation, see the [NAMD website](https://www.ks.uiuc.edu/Research/namd/).
 
 !!! tip "GPU Nodes"
-    NAMD on Kestrel is GPU-accelerated and must be run on GPU nodes. Submit all NAMD jobs from a GPU login node or via Slurm to the GPU partition.
+    NAMD on Kestrel is GPU-accelerated. All NAMD jobs must be submitted from a GPU login node and must request GPU resources via `--gres=gpu`.
 
 ## Accessing NAMD on Kestrel
 
@@ -13,18 +13,12 @@ NAMD is available through the module system on Kestrel's GPU nodes:
 module load namd/3.0.2-mpi-smp-cuda
 ```
 
-This module is built against Cray MPICH with OFI/CXI support for native communication over Kestrel's Slingshot-11 high-speed network. Loading it automatically pulls in the required dependencies:
+Loading this module automatically pulls in the required dependencies:
 
 - `PrgEnv-gnu` (GCC compiler environment)
 - `cray-mpich/8.1.28` (MPI library with OFI/CXI transport)
 - `libfabric` (Slingshot-11 fabric interface)
 - `cuda/12.9`
-
-To confirm the module is available:
-
-```bash
-module avail namd
-```
 
 ## Running NAMD on Kestrel
 
@@ -66,7 +60,7 @@ srun -N1 --ntasks-per-node=1 --cpus-per-task=26 \
 
 ### Single-Node, Two GPUs
 
-Using both GPUs on a single node can improve throughput for larger systems. Allocate a node with 2 GPUs:
+Using 2 GPUs on a single node can improve throughput for larger systems. Allocate a node with 2 GPUs:
 
 ```bash
 salloc -A <account> -t 00:30:00 --nodes=1 --ntasks-per-node=1 --cpus-per-task=52 --mem=160G --gres=gpu:2 -p debug
@@ -87,7 +81,7 @@ srun -N1 --ntasks-per-node=1 --cpus-per-task=52 \
 
 ### Multi-Node
 
-For larger systems that benefit from more than one node, use the MPI build with `srun`. NAMD requires one MPI rank per node in SMP mode.
+For larger systems that benefit from more than one node, use `srun` across multiple nodes. NAMD requires one MPI rank per node in SMP mode.
 
 ```bash
 salloc -A <account> -t 01:00:00 --nodes=2 --ntasks-per-node=1 --cpus-per-task=26 --mem=80G --gres=gpu:1 -p debug
@@ -190,14 +184,12 @@ Higher `ns/day` and lower `s/step` values indicate better performance.
 
 ## Hints and Additional Resources
 
-1. **Slingshot RDMA**: The `namd/3.0.2-mpi-smp-cuda` module uses Cray MPICH with OFI/CXI, which enables native RDMA communication over Kestrel's Slingshot-11 interconnect. This is significantly faster than TCP-based communication for multi-node runs and is the recommended choice for any job spanning more than one node.
+1. **`+ppn` tuning**: Set `+ppn` to one less than `--cpus-per-task`. This reserves exactly one core per node for Charm++'s communication thread. Using the full core count for worker threads can cause communication stalls and degrade performance.
 
-2. **`+ppn` tuning**: Set `+ppn` to one less than `--cpus-per-task`. This reserves exactly one core per node for Charm++'s communication thread. Using the full core count for worker threads can cause communication stalls and degrade performance.
+2. **Multiple GPUs per node**: For multi-node runs, whether `+devices 0,1` helps depends on the size of your system. Enabling 2 GPUs on each node increases the total GPU count, which reduces the number of patches per GPU. If your system is not large enough to saturate all GPUs, this can slow the simulation down. Test on a short run first.
 
-3. **Multiple GPUs per node**: For multi-node runs, whether `+devices 0,1` helps depends on the size of your system. Enabling 2 GPUs on each node increases the total GPU count, which reduces the number of patches per GPU. If your system is not large enough to saturate all GPUs, this can slow the simulation down. Test on a short run first.
+3. **GPU offloading flags**: The two configuration file settings required to actually use the GPU are `GPUresident off` and `usePMEGPU on`. `GPUresident off` enables standard GPU force-offloading (non-bonded forces computed on GPU, integration on CPU). `usePMEGPU on` additionally moves long-range electrostatics (PME) to the GPU. Without both flags, NAMD will run on CPU only even when `+devices` is specified. For fully GPU-resident execution (all computation on GPU, including integration), use `GPUresident on` instead — this can give further speedups on large systems but has some restrictions on supported features.
 
-4. **GPU offloading flags**: The two configuration file settings required to actually use the GPU are `GPUresident off` and `usePMEGPU on`. `GPUresident off` enables standard GPU force-offloading (non-bonded forces computed on GPU, integration on CPU). `usePMEGPU on` additionally moves long-range electrostatics (PME) to the GPU. Without both flags, NAMD will run on CPU only even when `+devices` is specified. For fully GPU-resident execution (all computation on GPU, including integration), use `GPUresident on` instead — this can give further speedups on large systems but has some restrictions on supported features.
+4. **Input files**: NAMD accepts a `.namd` configuration file that references your PSF, PDB, and parameter files. For generation of input files compatible with NAMD, see [VMD](https://www.ks.uiuc.edu/Research/vmd/) (Visual Molecular Dynamics), which is developed by the same group.
 
-5. **Input files**: NAMD accepts a `.namd` configuration file that references your PSF, PDB, and parameter files. For generation of input files compatible with NAMD, see [VMD](https://www.ks.uiuc.edu/Research/vmd/) (Visual Molecular Dynamics), which is developed by the same group.
-
-6. For additional documentation, tutorials, and mailing list support, see the [NAMD documentation page](https://www.ks.uiuc.edu/Research/namd/current/ug/) and the [NAMD mailing list](https://www.ks.uiuc.edu/Research/namd/mailing_list/).
+5. For additional documentation, tutorials, and mailing list support, see the [NAMD documentation page](https://www.ks.uiuc.edu/Research/namd/current/ug/) and the [NAMD mailing list](https://www.ks.uiuc.edu/Research/namd/mailing_list/).
