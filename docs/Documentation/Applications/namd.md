@@ -3,11 +3,13 @@
 NAMD is developed by the Theoretical and Computational Biophysics Group at the University of Illinois Urbana-Champaign. It uses the Charm++ parallel programming model with an SMP (Symmetric Multi-Processing) runtime, enabling efficient scaling across both CPU cores and GPU accelerators. Common use cases include protein folding, membrane dynamics, and free energy calculations. For more information and documentation, see the [NAMD website](https://www.ks.uiuc.edu/Research/namd/).
 
 !!! tip "GPU Nodes"
-    NAMD on Kestrel is GPU-accelerated. All NAMD jobs must be submitted from a GPU login node and must request GPU resources via `--gres=gpu`.
+    This page covers the GPU-accelerated NAMD module (`namd/3.0.2-mpi-smp-cuda`). Jobs using this module must be submitted from a GPU login node and must request GPU resources via `--gres=gpu`. CPU-only modules are also available; see [Accessing NAMD on Kestrel](#accessing-namd-on-kestrel) below.
 
 ## Accessing NAMD on Kestrel
 
-NAMD is available through the module system on Kestrel's GPU nodes:
+NAMD is available through the module system on both GPU and CPU nodes.
+
+### GPU module (covered by this guide)
 
 ```bash
 module load namd/3.0.2-mpi-smp-cuda
@@ -19,6 +21,22 @@ Loading this module automatically pulls in the required dependencies:
 - `cray-mpich/8.1.28` (MPI library with OFI/CXI transport)
 - `libfabric` (Slingshot-11 fabric interface)
 - `cuda/12.9`
+
+### CPU modules
+
+For CPU-only runs (no GPU required), the following modules are available on standard compute nodes:
+
+```
+namd/2.14
+namd/2.14_cray
+namd/2.14_cray_abi
+namd/3.0_cray
+namd/3.0_intel
+namd/3.0_intel2
+namd/3.0_intel_mpich
+```
+
+The rest of this guide focuses on the GPU module.
 
 ## Running NAMD on Kestrel
 
