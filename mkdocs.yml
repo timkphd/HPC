@@ -102,6 +102,7 @@ nav:
             - Interactive Mode: Documentation/Applications/Matlab/interactive.md
             - Parallel Computing Toolbox: Documentation/Applications/Matlab/parallel.md
             - Versions and Licenses: Documentation/Applications/Matlab/versions.md
+          - NAMD:       Documentation/Applications/namd.md
           - OpenFAST/FAST.Farm: Documentation/Applications/openfast.md
           - OpenFOAM: Documentation/Applications/openfoam.md
           - PLEXOS:
