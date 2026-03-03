@@ -71,6 +71,7 @@ nav:
           - Lmod: Documentation/Environment/lmod.md
           # - Customization:
           - Conda: Documentation/Environment/Customization/conda.md
+          - Pixi: Documentation/Environment/Customization/pixi.md
           - Building an Application: 
             - Documentation/Environment/Building_Packages/index.md
             - Documentation/Environment/Building_Packages/acquire.md
