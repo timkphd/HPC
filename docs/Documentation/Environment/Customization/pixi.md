@@ -119,7 +119,7 @@ Note that in this example, we specify `cuda = "12.4"` under `[system-requirement
 
 ## Package caching location
 
-On Kestrel, the Pixi modules are designed to cache downloaded packages to `/scratch/${USER}/.cache/rattler` by default. This saves users storage space in their `/home` or `/projects` folders, though this may be overridden by users by modifying and exporting the `PIXI_CACHE_DIR` environment variable after loading the module.
+On Kestrel, the Pixi modules are designed to cache downloaded packages to `/scratch/${USER}/.cache/rattler` by default. This saves storage space in `/home` or `/projects` folders, though this may be overridden by modifying and exporting the `PIXI_CACHE_DIR` environment variable after loading the module.
 
 To save space in your personal `/scratch`, you may safely run `rm -rf /scratch/${USER}/.cache/rattler` at any time to clear this cache directory.
 
