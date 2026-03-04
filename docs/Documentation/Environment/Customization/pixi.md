@@ -115,7 +115,7 @@ The following script represents a minimal example of using the Pixi module to 1.
 Note that in this example, we specify `cuda = "12.4"` under `[system-requirements]` in the `pixi.toml`. This will allow Pixi to install a GPU-enabled version of PyTorch; without this, Pixi would install a CPU-only version of `torch`. Additionally, when creating environments from a custom `pixi.toml`, note that anything under `[dependencies]` is functionally equivalent to `pixi add <package1> <package2> ... <packageN>` as written in the [CPU example above](#minimal-environment-example-on-kestrel---cpu). At the time of writing, the GPU drivers on Kestrel are compatible with `cuda/12.4+`, so we pin `cuda-version = ">=12.4"` as a dependency accordingly as an extra insurance that we pull a compatible version of PyTorch.
 
 !!! warning "A note on performant, multi-node PyTorch on Kestrel's GPU nodes"
-    Note that installing PyTorch with the aim for good communication performance across multiple GPU nodes Kestrel requires special considerations that are not covered in this page. See [our dedicated documentation on the topic](../../Machine_Learning/index.md#installing-pytorch-on-kestrel-with-multi-node-and-gpu-support) for more information.
+    Note that installing PyTorch with the aim for good communication performance across multiple GPU nodes on Kestrel requires special considerations that are not covered in this page. See [our dedicated documentation on the topic](../../Machine_Learning/index.md#installing-pytorch-on-kestrel-with-multi-node-and-gpu-support) for more information.
 
 ## Package caching location
 
