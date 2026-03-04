@@ -80,7 +80,7 @@ Note that the Python script intended to be run by this environment (`numpy-test.
 
 ## Minimal environment example on Kestrel - GPU
 
-The following script represents a minimal example of using the Pixi module to 1. create a simple Pixi environment containing a GPU-enabled version of `torch` (named `numpy-workspace`) and then 2. run a simple Python command that verifies whether this environment's `torch` can see a GPU device. **Be sure to run this on a GPU node:**
+The following script represents a minimal example of using the Pixi module to 1. create a simple Pixi environment containing a GPU-enabled version of `torch` (named `cuda-workspace`) and then 2. run a simple Python command that verifies whether this environment's `torch` can see a GPU device. **Be sure to run this on a GPU node:**
 
 ??? "Example: Using Pixi to create a GPU-enabled PyTorch environment on Kestrel"
     ```
