@@ -20,7 +20,7 @@ an exceptional experience similar to popular package managers like cargo or
 npm, but for any language.
 ```
 
-Pixi is mainly designed to create environments for a specific project/working directory. Two minimal examples (one for CPU nodes, and another for GPU nodes) of creating a Pixi environment and running a script from each are provided below. NLR HPC users are encouraged to consult the [Pixi documentation](https://pixi.prefix.dev) for more information on how to get the most from Pixi.
+Pixi is mainly designed to create environments for a specific project/working directory. Two minimal examples (one for CPU nodes, and another for GPU nodes) of creating a Pixi environment and running a script from each are provided below. Please consult the [Pixi documentation](https://pixi.prefix.dev) for more information on how to get the most from Pixi.
 
 ## Minimal environment example on Kestrel - CPU
 
