@@ -133,7 +133,7 @@ $ salloc -A <projectname> -t 00:30:00 --nodes=2 --ntasks-per-node=32 --mem=80G -
 2. The terminal will display `<username>@<nodename>` when successful.
 ```
 $ module load mstar
-$ mpirun --map-by node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 2 mstar-cfd-mgpu -i input.xml -o out --gpu-ids "0,0" 
+$ mpirun --map-by node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 2 mstar-cfd-mgpu --disable-ipc -i input.xml -o out --gpu-ids "0,0" 
 ```
 
 ##### Run in batch mode
@@ -154,7 +154,7 @@ Typical command line usage would involve submitting the task as a [batch job](..
 module load mstar
 
 # Run the application
-mpirun --map-by node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 2 mstar-cfd-mgpu -i input.xml -o out --gpu-ids "0,0"
+mpirun --map-by node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 2 mstar-cfd-mgpu --disable-ipc -i input.xml -o out --gpu-ids "0,0"
 ```
 Save it to a file named 'jobScipt.sh' and submit it to the queue for execution as follows:
 ```
