@@ -126,26 +126,37 @@ For using M-Star over multiple nodes, please set up your case with the GUI metho
 
 ##### Run interactively
 
-1. Open a SSH connection to Kestral terminal and get an [allocation](../Slurm/interactive_jobs.md). For example, to test over 2 nodes with 1 GPU per node,
+###### Single node, multiple GPUs
+To use multiple GPUs on a single node, request a node with the required number of GPUs and pass all GPU IDs to `--gpu-ids`:
+```
+$ salloc -A <projectname> -t 00:30:00 --nodes=1 --ntasks-per-node=64 --mem=160G --gres=gpu:2 --partition=debug
+```
+```
+$ module load mstar
+$ mpirun --map-by ppr:2:node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 2 mstar-cfd-mgpu --disable-ipc -i input.xml -o out --gpu-ids "0,1"
+```
+
+###### Multiple nodes, one GPU per node
+To spread across multiple nodes with one GPU per node,
 ```
 $ salloc -A <projectname> -t 00:30:00 --nodes=2 --ntasks-per-node=32 --mem=80G --gres=gpu:1 --partition=debug 
 ```
 2. The terminal will display `<username>@<nodename>` when successful.
 ```
 $ module load mstar
-$ mpirun --map-by node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 2 mstar-cfd-mgpu --disable-ipc -i input.xml -o out --gpu-ids "0,0" 
+$ mpirun --map-by ppr:1:node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 2 mstar-cfd-mgpu --disable-ipc -i input.xml -o out --gpu-ids "0,0" 
 ```
 
 ##### Run in batch mode
-Typical command line usage would involve submitting the task as a [batch job](../Slurm/batch_jobs.md). An equivalent batch script example is below: 
+Typical command line usage would involve submitting the task as a [batch job](../Slurm/batch_jobs.md). An equivalent batch script example for single-node multi-GPU is below: 
 ```
 #!/bin/bash
 #SBATCH --account=<projectname>
 #SBATCH --time=00:30:00
-#SBATCH --nodes=2
-#SBATCH --ntasks-per-node=32
-#SBATCH --mem=80G
-#SBATCH --gres=gpu:1
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=64
+#SBATCH --mem=160G
+#SBATCH --gres=gpu:2
 #SBATCH --partition=debug
 #SBATCH --job-name=mstar_job
 #SBATCH --output=slurm-%j.out
@@ -154,10 +165,105 @@ Typical command line usage would involve submitting the task as a [batch job](..
 module load mstar
 
 # Run the application
-mpirun --map-by node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 2 mstar-cfd-mgpu --disable-ipc -i input.xml -o out --gpu-ids "0,0"
+mpirun --map-by ppr:2:node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 2 mstar-cfd-mgpu --disable-ipc -i input.xml -o out --gpu-ids "0,1"
 ```
 Save it to a file named 'jobScipt.sh' and submit it to the queue for execution as follows:
 ```
 $ sbatch jobScipt.sh 
 ```
-Please note that `--gpu-ids "0,0"` represents the ID's of the GPUs. In this case, the first available GPU of each node. To learn more about command line options, please refer to the [M-Star documentation](https://docs.mstarcfd.com/10_Running_the_Solver/cli.html).  
+Please note that `--gpu-ids "0,1"` lists the IDs of the GPUs to use — adjust the list and `-np` count to match the number of GPUs requested. To learn more about command line options, please refer to the [M-Star documentation](https://docs.mstarcfd.com/10_Running_the_Solver/cli.html).  
+
+## Installation and Usage on Gila
+
+[Gila](../Systems/Gila/index.md) is an OpenHPC-based cluster at NLR with several GPU node types, including NVIDIA A100 and AMD MI210/MI250 nodes. MARBLES supports AMD GPUs via the HIP/ROCm backend inherited from AMReX. M-Star runs on the A100 nodes via a dedicated module.
+
+### NLR MARBLES on Gila (AMD MI250)
+
+MARBLES can be compiled for AMD GPUs using the ROCm toolchain on Gila's `gpu-amd-mi250` partition. Do not build on login nodes — request an interactive allocation on the GPU node first.
+
+Request an interactive session on the AMD GPU node:
+```
+$ salloc -A <projectname> -t 01:00:00 --nodes=1 --ntasks-per-node=5 --mem=80G --gres=gpu:1 --partition=gpu-amd-mi250
+```
+
+Once on the compute node, load the required modules and set up the environment:
+```
+$ module load gcc/14.2.0
+$ module load rocm/7.2.0
+$ export AMREX_HOME=/home/<username>/apps/amrex
+$ export HIPCC_COMPILE_FLAGS_APPEND="--gcc-toolchain=$(dirname $(dirname $(which g++)))"
+```
+
+!!! note
+    `HIPCC_COMPILE_FLAGS_APPEND` points `hipcc` to the GCC 14.2.0 toolchain loaded above. Without this, `hipcc` may pick up an incompatible system GCC and fail to compile device code.
+
+If you have not already cloned AMReX, do so now (match the version used for the MARBLES source):
+```
+$ mkdir -p ~/apps && cd ~/apps
+$ git clone https://github.com/AMReX-Codes/amrex.git
+$ cd amrex && git checkout 25.11 && cd ..
+```
+
+Clone MARBLES and build with HIP:
+```
+$ cd /projects/<projectname>/<username>/marblesLBM/marblesThermal/Build
+$ make USE_HIP=TRUE
+```
+
+On success, the `Build` directory will contain the MPI + HIP executable, e.g.:
+```
+marbles3d.gnu.TPROF.MPI.HIP.ex
+```
+
+Run a test case:
+```
+$ cp ../Tests/test_files/isothermal_cracks/* .
+$ srun -n 1 marbles3d.gnu.TPROF.MPI.HIP.ex isothermal_cracks.inp
+```
+
+!!! note
+    For available modules on Gila, see the [Gila modules page](../Systems/Gila/modules.md). For partition details and node specifications, see the [Gila running page](../Systems/Gila/running.md).
+
+### M-Star on Gila (NVIDIA A100)
+
+M-Star 4.1.15 is available on Gila's `gpu-intel-a100-80g` partition (8x A100-80GB GPUs per node, Intel Xeon Icelake CPUs). The module is installed under a separate module path that must be added before loading.
+
+Request an interactive session on an A100 node:
+```
+$ salloc -A <projectname> -t 01:00:00 --nodes=1 --ntasks-per-node=42 --mem=800G --gres=gpu:8 --partition=gpu-intel-a100-80g
+```
+
+Load the M-Star module:
+```
+$ module use /nopt/nrel/apps/modulefiles
+$ module load mstar/4.1.15
+```
+
+Run M-Star across all 8 GPUs on the node:
+```
+$ mpirun --map-by ppr:8:node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 8 \
+    mstar-cfd-mgpu -i input.xml -o out --gpu-ids "0,1,2,3,4,5,6,7"
+```
+
+An equivalent batch script:
+```
+#!/bin/bash
+#SBATCH --account=<projectname>
+#SBATCH --time=01:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=42
+#SBATCH --mem=800G
+#SBATCH --gres=gpu:8
+#SBATCH --partition=gpu-intel-a100-80g
+#SBATCH --job-name=mstar_gila
+#SBATCH --output=slurm-%j.out
+
+module use /nopt/nrel/apps/modulefiles
+module load mstar/4.1.15
+
+mpirun --map-by ppr:8:node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 8 \
+    mstar-cfd-mgpu -i input.xml -o out --gpu-ids "0,1,2,3,4,5,6,7"
+```
+
+!!! note
+    Unlike Kestrel, intra-node multi-GPU runs on Gila use CUDA IPC (no `--disable-ipc` needed). The `--disable-ipc` flag is only required for multi-node Kestrel runs. For command line options, refer to the [M-Star documentation](https://docs.mstarcfd.com/10_Running_the_Solver/cli.html).

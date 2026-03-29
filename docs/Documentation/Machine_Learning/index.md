@@ -166,6 +166,45 @@ If another version of pytorch is desired, users may compile and install it on th
        $ MAX_JOBS=20 python setup.py install
     ```
 
+??? note "Experimental: Pre-built pytorch/2.10.0 module (H100 only)"
+
+    A pre-built `pytorch` module is available on Kestrel as an experimental alternative to the conda-based approach above. It provides PyTorch 2.10.0 with CUDA 12.4, NCCL 2.23.4, and Python 3.11, and is optimized for **H100 GPUs only (sm_90)**.
+
+    Load it with:
+    ```
+    module load pytorch
+    ```
+
+    which will print usage instructions:
+    ```
+    PyTorch 2.10.0 loaded (CUDA 12.4 | NCCL 2.23.4 | Python 3.11 | H100/sm_90 only)
+
+    No extra packages needed? Use directly:
+      python3 your_script.py
+
+    Option 1 — venv (recommended when you need extra pip packages):
+      python3 -m venv /scratch/$USER/myenv --system-site-packages
+      source /scratch/$USER/myenv/bin/activate
+      pip install <your-packages>
+
+    Option 2 — conda env (only when you need non-Python deps like compiled libs or tools):
+      conda create -p ~/myenv <non-python-deps>
+      conda activate ~/myenv
+      $PYTORCH_PYTHON \
+          -m venv ~/myenv/pyenv --system-site-packages
+      source ~/myenv/pyenv/bin/activate
+      pip install <your-packages>
+      NOTE: do NOT 'conda install' Python packages — use the venv pip instead.
+    ```
+
+    Full documentation (installed packages list, multi-node usage, known limitations):
+    ```
+    /nopt/nrel/apps/gpu_stack/software/pytorch/USER_GUIDE.md
+    ```
+
+    !!! warning
+        This module is **experimental**. It targets H100 GPUs (sm_90) only and will not work on other GPU architectures. Use the conda-based pre-built environment above for broader compatibility.
+
 ### Installing PyTorch on Gila
 
 The [Gila](../Systems/Gila/index.md) cluster hosts two types of accelerator nodes. Although both types use GPU drivers compatible with `cuda/13.1`, critically, they differ in their overall chip architecture: 
