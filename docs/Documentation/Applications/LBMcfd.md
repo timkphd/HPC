@@ -206,19 +206,22 @@ $ cd amrex && git checkout 25.11 && cd ..
 
 Clone MARBLES and build with HIP:
 ```
+$ cd /projects/<projectname>/<username>/
+$ mkdir marblesLBM && cd marblesLBM
+$ git clone https://github.com/nileshsawant/marblesThermal
 $ cd /projects/<projectname>/<username>/marblesLBM/marblesThermal/Build
-$ make USE_HIP=TRUE
+$ make USE_HIP=TRUE COMP=clang USE_MPI=FALSE USE_RPATH=TRUE AMREX_AMD_ARCH=gfx90a
 ```
 
-On success, the `Build` directory will contain the MPI + HIP executable, e.g.:
+On success, the `Build` directory will contain the HIP executable, e.g.:
 ```
-marbles3d.gnu.TPROF.MPI.HIP.ex
+marbles3d.hip.TPROF.HIP.ex
 ```
 
 Run a test case:
 ```
 $ cp ../Tests/test_files/isothermal_cracks/* .
-$ srun -n 1 marbles3d.gnu.TPROF.MPI.HIP.ex isothermal_cracks.inp
+$ ./marbles3d.hip.TPROF.HIP.ex isothermal_cracks.inp
 ```
 
 !!! note
