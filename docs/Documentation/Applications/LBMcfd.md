@@ -190,26 +190,30 @@ Once on the compute node, load the required modules and set up the environment:
 ```
 $ module load gcc/14.2.0
 $ module load rocm/7.2.0
-$ export AMREX_HOME=/home/<username>/apps/amrex
 $ export HIPCC_COMPILE_FLAGS_APPEND="--gcc-toolchain=$(dirname $(dirname $(which g++)))"
 ```
 
 !!! note
     `HIPCC_COMPILE_FLAGS_APPEND` points `hipcc` to the GCC 14.2.0 toolchain loaded above. Without this, `hipcc` may pick up an incompatible system GCC and fail to compile device code.
 
-If you have not already cloned AMReX, do so now (match the version used for the MARBLES source):
-```
-$ mkdir -p ~/apps && cd ~/apps
-$ git clone https://github.com/AMReX-Codes/amrex.git
-$ cd amrex && git checkout 25.11 && cd ..
-```
+!!! warning
+    Do **not** set `AMREX_HOME` in your environment. MARBLES ships AMReX as a git submodule pinned to a specific commit that is tested and compatible with ROCm 7.2.0. Setting `AMREX_HOME` overrides this and will likely cause compile errors. If you have it set from another workflow, unset it before building:
+    ```
+    $ unset AMREX_HOME
+    ```
 
-Clone MARBLES and build with HIP:
+Clone MARBLES and initialize the bundled AMReX submodule:
 ```
 $ cd /projects/<projectname>/<username>/
 $ mkdir marblesLBM && cd marblesLBM
 $ git clone https://github.com/nileshsawant/marblesThermal
-$ cd /projects/<projectname>/<username>/marblesLBM/marblesThermal/Build
+$ cd marblesThermal
+$ git submodule update --init --recursive Submodules/AMReX
+```
+
+Build with HIP:
+```
+$ cd Build
 $ make USE_HIP=TRUE COMP=clang USE_MPI=FALSE USE_RPATH=TRUE AMREX_AMD_ARCH=gfx90a
 ```
 
@@ -241,6 +245,9 @@ Load the M-Star module:
 $ module use /nopt/nrel/apps/modulefiles
 $ module load mstar/4.1.15
 ```
+
+!!! note
+    `mstar/4.1.15` automatically loads `cuda/13.1.1` and `hpcx/2.26` (OpenMPI). No separate module load commands are needed.
 
 Run M-Star across all 8 GPUs on the node:
 ```
