@@ -229,7 +229,7 @@ $ ./marbles3d.hip.TPROF.HIP.ex isothermal_cracks.inp
 ```
 
 !!! note
-    For available modules on Gila, see the [Gila modules page](../Systems/Gila/modules.md). For partition details and node specifications, see the [Gila running page](../Systems/Gila/running.md).
+    See the [Gila Modules page](../Systems/Gila/modules.md) for information on the module system. For partition details and node specifications, see the [Running on Gila page](../Systems/Gila/running.md).
 
 ### M-Star on Gila (NVIDIA A100)
 
