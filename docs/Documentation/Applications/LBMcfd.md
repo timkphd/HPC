@@ -268,7 +268,7 @@ An equivalent batch script:
 #SBATCH --job-name=mstar_gila
 #SBATCH --output=slurm-%j.out
 
-module use /nopt/nrel/apps/modulefiles
+module load application
 module load mstar/4.1.15
 
 mpirun --map-by ppr:8:node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 8 \
