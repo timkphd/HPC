@@ -242,7 +242,7 @@ $ salloc -A <projectname> -t 01:00:00 --nodes=1 --ntasks-per-node=42 --mem=800G 
 
 Load the M-Star module:
 ```
-$ module use /nopt/nrel/apps/modulefiles
+$ module load application
 $ module load mstar/4.1.15
 ```
 
