@@ -166,6 +166,37 @@ If another version of pytorch is desired, users may compile and install it on th
        $ MAX_JOBS=20 python setup.py install
     ```
 
+??? example "Experimental: Pre-built pytorch/2.10.0 module"
+
+    A pre-built `pytorch` module is available on Kestrel as an experimental alternative to the conda-unpack based approach above. It provides PyTorch 2.10.0 with CUDA 12.4, NCCL 2.23.4, and Python 3.11. It is for **GPUs nodes only**.
+
+    Load it with:
+    ```
+    module load pytorch
+    ```
+
+    which will print usage instructions:
+    ```
+    PyTorch 2.10.0 loaded (CUDA 12.4 | NCCL 2.23.4 | Python 3.11 | H100/sm_90 only)
+
+    No extra packages needed? Use directly:
+      python3 your_script.py
+
+    Option 1 — venv (recommended when you need extra pip packages):
+      python3 -m venv /scratch/$USER/myenv --system-site-packages
+      source /scratch/$USER/myenv/bin/activate
+      pip install <your-packages>
+
+    Option 2 — conda env (only when you need non-Python deps like compiled libs or tools):
+      conda create -p ~/myenv <non-python-deps>
+      conda activate ~/myenv
+      $PYTORCH_PYTHON \
+          -m venv ~/myenv/pyenv --system-site-packages
+      source ~/myenv/pyenv/bin/activate
+      pip install <your-packages>
+      NOTE: do NOT 'conda install' Python packages — use the venv pip instead.
+    ```
+
 ### Installing PyTorch on Gila
 
 The [Gila](../Systems/Gila/index.md) cluster hosts two types of accelerator nodes. Although both types use GPU drivers compatible with `cuda/13.1`, critically, they differ in their overall chip architecture: 
