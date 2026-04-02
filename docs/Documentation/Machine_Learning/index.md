@@ -166,7 +166,7 @@ If another version of pytorch is desired, users may compile and install it on th
        $ MAX_JOBS=20 python setup.py install
     ```
 
-??? note "Experimental: Pre-built pytorch/2.10.0 module"
+??? example "Experimental: Pre-built pytorch/2.10.0 module"
 
     A pre-built `pytorch` module is available on Kestrel as an experimental alternative to the conda-unpack based approach above. It provides PyTorch 2.10.0 with CUDA 12.4, NCCL 2.23.4, and Python 3.11. It is for **GPUs nodes only**.
 
