@@ -4,7 +4,7 @@
 
 # Using Pixi on Kestrel
 
-Pixi is available as a module on both the CPU and GPU nodes on Kestrel:
+Pixi is available as a module on both the CPU and GPU nodes on [Kestrel](../../Systems/Kestrel/index.md):
 
 ```
 $ ml help pixi
@@ -117,15 +117,61 @@ Note that in this example, we specify `cuda = "12.4"` under `[system-requirement
 !!! warning "A note on performant, multi-node PyTorch on Kestrel's GPU nodes"
     Note that installing PyTorch with the aim for good communication performance across multiple GPU nodes on Kestrel requires special considerations that are not covered in this page. See [our dedicated documentation on the topic](../../Machine_Learning/index.md#installing-pytorch-on-kestrel-with-multi-node-and-gpu-support) for more information.
 
-## Package caching location
+## Package caching location - Kestrel
 
 On Kestrel, the Pixi modules are designed to cache downloaded packages to `/scratch/${USER}/.cache/rattler` by default. This saves storage space in `/home` or `/projects` folders, though this may be overridden by modifying and exporting the `PIXI_CACHE_DIR` environment variable after loading the module.
 
 To save space in your personal `/scratch`, you may safely run `rm -rf /scratch/${USER}/.cache/rattler` at any time to clear this cache directory.
 
-## Tips and tricks for using Pixi on Kestrel
+# Using Pixi on Gila
 
-**Coming soon!**
+Pixi is available as a module for both `arm` and `x86` node architectures on [Gila](../../Systems/Gila/index.md). 
+
+!!! Note
+    Pixi environments built on Gila will only work for either `x86` or `arm` architectures depending on which node was used to create them. In other words, an environment created on an `x86`-based node hosting A100s would not be expected to work on an `arm`-based Grace Hopper node (and vice versa). This is generally true for all software managed on Gila. As such, always ensure you are using an environment that was created on the same node architecture you plan to run it on.
+
+## Minimal environment example - Gila
+
+Note that the [Kestrel CPU example above](#minimal-environment-example-on-kestrel---cpu) should work on any type of node on Gila without modification. Some modifications are required for adapting the [Kestrel GPU example](#minimal-environment-example-on-kestrel---gpu) to Gila's GPUs, namely adjusting the `cuda` version (as well as adding 'linux-aarch64' to `platforms` to enable the use of a Gracehopper node). Below we provide the same example used for Kestrel for Gila's A100 and Gracehopper GPU nodes.
+
+??? "Example: Using Pixi to create a GPU-enabled PyTorch environment on any Gila GPU node"
+    ```bash
+    #!/bin/bash
+    # Load Pixi module
+    ml pixi
+    # Initialize Pixi environment
+    pixi init cuda-workspace
+    # Note that we navigate to the Pixi environment folder to add packages and eventually execute the Python script
+    cd cuda-workspace
+
+    # Manually create pixi.toml
+    cat <<EOF > pixi.toml
+    [workspace]
+    channels = ["https://prefix.dev/conda-forge"]
+    name = "pytorch-conda-forge"
+    # Note that we use the 'linux-64' platform for an 'x86' node like an A100 with Intel CPUs
+    # and the 'linux-aarch64' platform for an 'arm' node like a Gracehopper.
+    platforms = ["linux-64", "linux-aarch64"]
+
+    [system-requirements]
+    cuda = "13.2"
+
+    [dependencies]
+    pytorch-gpu = "*"
+    cuda-version = ">=13.2"
+    cowpy = "*"
+    python = "3.11.*"
+    EOF
+    pixi run cowpy "MUUUUUUDA!"
+    pixi run python -c "import torch; print('Can pixi find a GPU? -->', torch.cuda.is_available(), '\n', 'Using CUDA version:', torch.version.cuda)"
+    ```
+
+!!! Note
+    It is **highly** recommended to explicitly set `platforms = ["linux-64", "linux-aarch64"]` in a Gila project's `pixi.toml`. This facilitates switching between `arm` and `x86` nodes with ease. Pixi will automatically recreate the appropriate environment for the given chip architecture regardless of which architecture was used to originally create the workspace.
+
+## Package caching locations - Gila
+
+On Gila, the Pixi modules cache downloaded packages to either `/scratch/${USER}/.cache/x86/rattler` or `/scratch/${USER}/.cache/arm/rattler` depending on the architecture of the node you are connected to. 
 
 # Useful links
 
