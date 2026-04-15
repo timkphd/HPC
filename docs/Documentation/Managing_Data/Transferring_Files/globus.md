@@ -23,7 +23,7 @@ providing automatic fault recovery and notification of completion or problems.
 
 ## Get a Globus Account
 
-### Internal
+### Internal Users
 
 Globus has linked institutional identities with NLR, so if you are an NLR user, you should set up Globus accounts using your NLR account.
 
