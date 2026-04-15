@@ -23,7 +23,24 @@ providing automatic fault recovery and notification of completion or problems.
 
 ## Get a Globus Account
 
-To get a Globus account, sign up on the [Globus account website](https://www.globusid.org/create).
+### Internal
+
+Globus has linked institutional identities with NLR, so if you are an NLR user, you should set up Globus accounts using your NLR account.
+
+1. Navigate to the [Globus Login Page](https://app.globus.org) (sign out if you are logged in), and in the dropdown menu under "Use your organizational login", type NLR and select the National Laboratory of the Rockies option.
+![An image of the Globus login page with National Lab of the Rockies selected in the "Use your organizational login" dropdown menu](../../../assets/images/Globus/1GlobusSelectNLR.png)
+2. Log in using your NLR account and click "Accept" for Globus SSO.
+![Sample](../../../assets/images/Globus/2GlobusVerify.png)
+3. Once you have successfully logged in, you will see two options "Continue" and "Link to an Existing account". If you have previously used Globus (via another institution or GlobusID), please select "Link to an Existing Account" and move to step 4; otherwise, select "Continue" and you are done.
+![Sample](../../../assets/images/Globus/3GlobusNewInstitutionLogin.png)
+4. Now, select the other insitution from the dropdown menu and login using the credentials for that Globus account. Then, your accounts will be linked along with your identities and bookmarks.
+![Sample](../../../assets/images/Globus/4GlobusIDLinking.png)
+
+### External Users
+
+If this is your first time using Globus, get a Globus account, sign up on the [GlobusID account website](https://www.globusid.org/create).
+
+If you previous had an account, you may use that account and follow the steps below to link the NLR Globus endpoints.
 
 ## Globus NLR Endpoints
 
