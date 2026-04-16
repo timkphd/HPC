@@ -41,7 +41,7 @@ permissions and history." The two options are "Continue" and "Link to an existin
 
 If this is your first time using Globus, get a Globus account by signing up on the [Globus ID account website](https://www.globusid.org/create).
 
-If you previously had an account, you may use that account and follow the steps below to link the NLR Globus endpoints.
+If you previously had an account, you may use that account and follow the steps below to connect to the NLR Globus endpoints.
 
 ## Globus NLR Endpoints
 
