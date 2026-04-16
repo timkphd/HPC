@@ -131,6 +131,7 @@ OpenFOAM v2412 compiled with cray-mpich has been used to perform [strong scaling
 Two versions are available on Gila. OpenFOAM 11 is the default.
 
 ```
+$ module load application
 $ module avail openfoam
 
 -------- [ Research Applications ] --------
