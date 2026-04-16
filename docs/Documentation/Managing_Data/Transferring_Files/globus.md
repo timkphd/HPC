@@ -25,13 +25,13 @@ providing automatic fault recovery and notification of completion or problems.
 
 ### Internal Users
 
-Globus has linked institutional identities with NLR, so if you are an NLR user, you should set up Globus accounts using your NLR account.
+Globus has linked institutional identities with NLR, so if you are an NLR employee, you should set up your Globus account using your NLR account.
 
-1. Navigate to the [Globus Login Page](https://app.globus.org) (sign out if you are logged in), and in the dropdown menu under "Use your organizational login", type NLR and select the National Laboratory of the Rockies option.
+1. Navigate to the [Globus Login Page](https://app.globus.org) (sign out if you are logged in), and in the dropdown menu under "Use your organizational login", type "NLR" and select the "National Laboratory of the Rockies" option.
 ![The Globus login page. In the "Use your organizational login" dropdown menu, "National Laboratory of the Rockies" is selected.](/assets/images/Globus/1GlobusSelectNLR.png)
 2. Log in using your NLR account and click "Accept" for Globus SSO.
 <img src="/assets/images/Globus/2GlobusVerify.png" alt="The Microsoft's &quot;Permissions requested&quot; menu, with the requestor being Globus SSO. The menu notes that the Globus SSO is not published by Microsoft. The two options at the bottom of the menu are &quot;Cancel&quot; and &quot;Accept&quot;." style="width:50%">
-3. Once you have successfully logged in, you will see two options "Continue" and "Link to an existing account". If you have previously used Globus (via another institution or GlobusID), please select "Link to an existing account" and move to step 4; otherwise, select "Continue" and you are done.
+3. Once you have successfully logged in, you will see two options: "Continue" and "Link to an existing account". If you have previously used Globus (via another institution or GlobusID), please select "Link to an existing account" and move to step 4. Otherwise, select "Continue" and you are done.
 ![The Globus successful login page. Text: "This is the first time you are accessing Globus with your National Laboratory of the Rockies login. If you have previously used Globus with another login you can link it to your National Laboratory of the Rockies login. When linked, both logins will be able to access the same Globus account
 permissions and history." The two options are "Continue" and "Link to an existing account". An additional hyperlink has the text "Why should I link accounts?"](/assets/images/Globus/3GlobusNewInstitutionLogin.png)
 4. Now, select the other institution from the dropdown menu and log in using the credentials for that Globus account. Then, your accounts will be linked along with your identities and bookmarks.
@@ -41,7 +41,7 @@ permissions and history." The two options are "Continue" and "Link to an existin
 
 If this is your first time using Globus, get a Globus account by signing up on the [Globus ID account website](https://www.globusid.org/create).
 
-If you previously had an account, you may use that account and follow the steps below to link the NLR Globus endpoints.
+If you previously had an account, you may use that account and follow the steps below to connect to the NLR Globus endpoints.
 
 ## Globus NLR Endpoints
 
