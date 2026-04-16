@@ -125,3 +125,115 @@ OpenFOAM v2412 compiled with cray-mpich has been used to perform [strong scaling
 ![<strongScaling>](openfoam_metadata/DrivAerScaling.png "strongScaling"){width=1000}
 ![<strongScaling>](openfoam_metadata/hbwDrivAerScaling.png "strongScaling"){width=1000}
 ![<model>](openfoam_metadata/DrivAerModel.png "model"){width=1000}
+
+## OpenFOAM on Gila
+
+Two versions are available on Gila. OpenFOAM 11 is the default.
+
+```
+$ module avail openfoam
+
+-------- [ Research Applications ] --------
+   openfoam/11-gcc (D)    openfoam/13-gcc
+
+  Where:
+   D:  Default Module
+```
+
+Load the module:
+
+```bash
+module load application
+module load openfoam/13-gcc
+```
+
+### Running on Gila
+
+!!! warning "Use `mpirun`, not `srun`, on Gila"
+    There is a PMIx version mismatch between the OpenFOAM OpenMPI build and the
+    SLURM version on Gila. Jobs launched with `srun` will hang or fail.
+    Use `mpirun` as shown in the example below.
+
+OpenMPI does not forward the shell environment to remote ranks. Without an
+explicit `source` step on each rank, remote processes cannot find OpenFOAM's
+shared libraries. Wrap every solver call with `bash -c "source ..."`:
+
+```bash
+OF_BASHRC=/nopt/nrel/apps/software/openfoam/13/OpenFOAM-13/etc/bashrc
+
+mpirun -np $SLURM_NTASKS \
+  bash -c "source $OF_BASHRC && foamRun -parallel"
+```
+
+### Sample batch script
+
+??? example "OpenFOAM 13 — `sbatch` script (Gila)"
+
+    ```bash
+    #!/bin/bash
+    #SBATCH --job-name=of13_run
+    #SBATCH --nodes=2
+    #SBATCH --ntasks-per-node=60
+    #SBATCH --mem=200G
+    #SBATCH --partition=amd
+    #SBATCH --account=<your_account>
+    #SBATCH --time=4:00:00
+
+    module load application
+    module load openfoam/13-gcc
+
+    OF_BASHRC=/nopt/nrel/apps/software/openfoam/13/OpenFOAM-13/etc/bashrc
+
+    decomposePar
+    mpirun -np $SLURM_NTASKS \
+      bash -c "source $OF_BASHRC && foamRun -parallel"
+    reconstructPar
+    ```
+
+### Scaling test
+
+A ready-to-run benchmark (1.62M-cell LES channel flow, 50 steps) is placed at
+`/nopt/nrel/apps/software/openfoam/13/scaling_test/`.
+
+```bash
+# 1. Copy to your work area
+cp -r /nopt/nrel/apps/software/openfoam/13/scaling_test ~/my_scaling_test
+cd ~/my_scaling_test
+
+# 2. Request an interactive allocation (adjust account and NP as needed)
+salloc -A <your_account> -t 01:00:00 --nodes=2 --ntasks-per-node=60 \
+       --mem=200G --partition=amd
+
+# 3. SSH into a compute node to get the full SLURM environment
+srun --pty bash
+
+# 4. Load modules and run
+module load application && module load openfoam/13-gcc
+./run_scaling_test.sh 32          # pass NP; defaults to $SLURM_NTASKS
+```
+
+The script runs `blockMesh`, `decomposePar`, and `foamRun` automatically and
+prints an execution-time summary. A `sbatch_scaling_sweep.sh` template is
+included for sweeping across multiple rank counts.
+
+Scaling results measured on 2 × AMD EPYC nodes (`amd` partition):
+
+| NP | ExecutionTime (s) | Speedup | Cells/rank |
+|----|------------------|---------|------------|
+|  4 |            137.3 |   1.00× |    405,000 |
+|  8 |             84.2 |   1.63× |    202,500 |
+| 16 |             69.0 |   2.00× |    101,250 |
+| 32 (2 nodes) |   80.9 |   1.65× |     50,625 |
+| 32 (1 node)  |   20.5 |   6.69× |     50,625 |
+
+NP=16 is the sweet spot for this 1.62M-cell mesh. The cross-node NP=32 case
+regresses because 50k cells/rank is too small for inter-node MPI overhead to
+pay off. Single-node NP=32 is ~4× faster than cross-node NP=32, confirming the
+cell-count-per-rank guidance below.
+
+| Cells/rank      | Expected behaviour                 |
+|-----------------|------------------------------------|
+| > 500,000       | Under-utilised — use more ranks    |
+| 100,000–500,000 | Good (70–90% efficiency)           |
+| 50,000–100,000  | Moderate (40–70%)                  |
+| < 50,000        | MPI overhead dominates             |
