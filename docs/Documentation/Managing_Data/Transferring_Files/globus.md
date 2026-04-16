@@ -27,7 +27,7 @@ providing automatic fault recovery and notification of completion or problems.
 
 Globus has linked institutional identities with NLR, so if you are an NLR employee, you should set up your Globus account using your NLR account.
 
-1. Navigate to the [Globus Login Page](https://app.globus.org) (sign out if you are logged in), and in the dropdown menu under "Use your organizational login", type NLR and select the National Laboratory of the Rockies option.
+1. Navigate to the [Globus Login Page](https://app.globus.org) (sign out if you are logged in), and in the dropdown menu under "Use your organizational login", type "NLR" and select the "National Laboratory of the Rockies" option.
 ![The Globus login page. In the "Use your organizational login" dropdown menu, "National Laboratory of the Rockies" is selected.](../../../assets/images/Globus/1GlobusSelectNLR.png)
 2. Log in using your NLR account and click "Accept" for Globus SSO.
 ![The Microsoft's "Permissions requested" menu, with the requestor being Globus SSO. The menu notes that the Globus SSO is not published by Microsoft. The two options at the bottom of the menu are "Cancel" and "Accept".](../../../assets/images/Globus/2GlobusVerify.png)
