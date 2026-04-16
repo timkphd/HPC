@@ -25,7 +25,7 @@ providing automatic fault recovery and notification of completion or problems.
 
 ### Internal Users
 
-Globus has linked institutional identities with NLR, so if you are an NLR user, you should set up Globus accounts using your NLR account.
+Globus has linked institutional identities with NLR, so if you are an NLR employee, you should set up your Globus account using your NLR account.
 
 1. Navigate to the [Globus Login Page](https://app.globus.org) (sign out if you are logged in), and in the dropdown menu under "Use your organizational login", type NLR and select the National Laboratory of the Rockies option.
 ![The Globus login page. In the "Use your organizational login" dropdown menu, "National Laboratory of the Rockies" is selected.](../../../assets/images/Globus/1GlobusSelectNLR.png)
