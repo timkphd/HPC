@@ -9,7 +9,7 @@ parent: Transferring Data
 
 *Learn how to transfer data within, to and from NLR's high-performance computing (HPC) systems.*
 
-For a video presentation on this topic, please see [Transfering data to and from Kestrel](https://nrel-my.sharepoint.com/:v:/r/personal/chschwin_nrel_gov/Documents/Recordings/Tutorials/Transferring%20Data%20to%20and%20from%20Kestrel.mov?csf=1&web=1&e=hagS2w&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D) by Matt Selensky.
+For a video presentation on this topic, please see [Transferring data to and from Kestrel](https://nrel-my.sharepoint.com/:v:/r/personal/chschwin_nrel_gov/Documents/Recordings/Tutorials/Transferring%20Data%20to%20and%20from%20Kestrel.mov?csf=1&web=1&e=hagS2w&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D) by Matt Selensky.
 
 For further information about invidiual systems' filesystem architecture and quotas, please see the [Systems section](../../Systems/). 
 
@@ -52,10 +52,10 @@ Additional rsync examples are available [here](https://github.com/NREL/HPC/tree/
 
 #### Large Transfers (>100GB) outside of the NLR network
 
-Globus is optimized for file transfers between data centers and anything outside of the NLR network. It will be several times faster than any other tools you will have available. Documentation about requesting a HPC Globus account is available on the [Globus Services page on the HPC website](https://www.nlr.gov/hpc/globus-file-transfer.html).  See [Transfering files using Globus](globus.md) for instructions on transfering files with Globus.
+Globus is optimized for file transfers between data centers and anything outside of the NLR network. It will be several times faster than any other tools you will have available.  See [Transferring Files using Globus](globus.md) for instructions on transferring files with Globus.
 
-#### Transfering files using Windows
-For Windows you will need to download WinSCP to transfer files to and from HPC systems over SCP. See [Transfering using WinSCP](https://www.nlr.gov/hpc/winscp-file-transfer.html).
+#### Transferring files using Windows
+For Windows you will need to download WinSCP to transfer files to and from HPC systems over SCP. See [Transferring using WinSCP](https://www.nlr.gov/hpc/winscp-file-transfer.html).
 
 
 ## Archiving files and directories
