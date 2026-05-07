@@ -166,18 +166,16 @@ srun python3 my_mqpu_script.py
     See the [parallelisation report](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/parallelisation_report.md)
     for benchmarks on Kestrel H100s.
 
----
-
 ### Multi-GPU Statevector (mgpu)
 
 The `mgpu` option of the `nvidia` target distributes the statevector across multiple
 GPUs using cuStateVec, enabling simulation of circuits that exceed single-GPU memory:
 
-| GPUs (H100 80 GB each) | fp32 qubit limit |
-|------------------------|-----------------|
-| 1 | ~30 qubits (~32 GB) |
-| 4 | ~32 qubits |
-| 8 | ~34 qubits (~69 GB/GPU) |
+| GPUs (H100 80 GB each) | fp32 qubit limit | Total statevector memory |
+|------------------------|-----------------|-------------------------|
+| 1 | ~33 qubits | ~64 GB |
+| 4 | ~35 qubits | ~256 GB (~64 GB/GPU) |
+| 8 | ~36 qubits | ~512 GB (~64 GB/GPU) |
 
 On Kestrel, multi-GPU requires GPU-aware MPI via the Cray GTL library. Use the
 wrapper script below to set the required environment variables **before** Python
@@ -353,8 +351,9 @@ python3 your_script.py
 ## Performance Notes
 
 - **Noise model limits**: noisy trajectory simulation requires one full statevector
-  per shot in GPU memory. At fp64, n=28 qubits uses ~4 GB; n=32 qubits uses ~69 GB
-  (exceeds a single H100). Use `mgpu,fp32` for circuits with more than ~28 qubits.
+  per shot in GPU memory. At fp32 a single H100 holds up to ~33 qubits (~64 GB);
+  at fp64 the limit is ~30 qubits (~32 GB). Use `mgpu,fp32` for noisy circuits
+  with more than ~33 qubits.
 
 - **Scaling**: for noisy simulation at ≤28 qubits, shot-splitting via mpi4py
   outperforms mgpu because shots run in parallel rather than sequentially.
