@@ -15,8 +15,7 @@ simulation and hybrid quantum-classical algorithms:
 | [mpi4py](https://mpi4py.readthedocs.io/) | 4.1.1 | (inherited) for multi-node parallel workflows |
 
 !!! note
-    The `qiskit/aer-gpu` module targets **H100 GPUs (sm_90)** on Kestrel. It will not
-    run on V100 or A100 nodes.
+    The `qiskit/aer-gpu` module targets the **H100 GPUs (sm_90)** on Kestrel's GPU nodes.
 
 ---
 
@@ -75,6 +74,10 @@ run on CPUs, GPUs, or QPU hardware.
 
 ### Single GPU
 
+See [`binary_optimizer.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/binary_optimizer.py)
+and [`qae.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/qae.py)
+for real-world examples using the single-GPU target.
+
 ```python
 import cudaq
 
@@ -93,7 +96,9 @@ print(result)   # { 00:~500  11:~500 }
 
 ### Noisy Simulation
 
-CUDA-Q supports trajectory-based noisy simulation using a depolarizing noise model:
+CUDA-Q supports trajectory-based noisy simulation using a depolarizing noise model.
+See [`binary_optimizer.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/binary_optimizer.py)
+for a production example with per-gate noise channels applied to a QAE circuit.
 
 ```python
 import cudaq
@@ -116,6 +121,8 @@ result = cudaq.sample(bell, shots_count=1000, noise_model=noise)
 The `mqpu` option assigns shots to multiple GPUs in parallel. Each GPU holds its own
 copy of the full statevector and executes an independent subset of shots — useful
 for shot-noisy sweeps where the circuit fits in a single GPU's memory.
+See [`bench_mqpu_dqa.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/bench_mqpu_dqa.py)
+for a DQA benchmark using this strategy on Kestrel H100s.
 
 ```python
 import cudaq
@@ -313,6 +320,9 @@ jupyter lab --no-browser --ip=0.0.0.0
 
 See the [Jupyter documentation](../Development/Jupyter/index.md) for instructions on
 forwarding the port to your local browser.
+
+A worked example notebook for QAE-based amplitude estimation is available at
+[`qae_example.ipynb`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/qae_example.ipynb).
 
 ---
 
