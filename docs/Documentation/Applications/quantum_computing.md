@@ -147,7 +147,8 @@ cudaq.mpi.finalize()
 
 ```bash
 #SBATCH --nodes=1
-#SBATCH --ntasks=4
+#SBATCH --ntasks-per-node=128
+#SBATCH --mem=320G
 #SBATCH --gpus-per-node=4
 
 module load qiskit/aer-gpu
@@ -222,7 +223,8 @@ cudaq.mpi.finalize()
 #!/bin/bash
 #SBATCH --account=<your-account>
 #SBATCH --nodes=1
-#SBATCH --ntasks=1
+#SBATCH --ntasks=32
+#SBATCH --mem=80G
 #SBATCH --gpus=1
 #SBATCH --time=01:00:00
 #SBATCH --job-name=qiskit_gpu
@@ -237,7 +239,8 @@ python3 my_qiskit_script.py
 #!/bin/bash
 #SBATCH --account=<your-account>
 #SBATCH --nodes=1
-#SBATCH --ntasks=1
+#SBATCH --ntasks=32
+#SBATCH --mem=80G
 #SBATCH --gpus=1
 #SBATCH --time=01:00:00
 #SBATCH --job-name=cudaq_single
@@ -252,7 +255,8 @@ python3 my_cudaq_script.py
 #!/bin/bash
 #SBATCH --account=<your-account>
 #SBATCH --nodes=1
-#SBATCH --ntasks=4
+#SBATCH --ntasks-per-node=128
+#SBATCH --mem=320G
 #SBATCH --gpus-per-node=4
 #SBATCH --time=02:00:00
 #SBATCH --job-name=cudaq_mgpu
@@ -267,7 +271,8 @@ srun bash run_mgpu.sh my_cudaq_mgpu_script.py
 #!/bin/bash
 #SBATCH --account=<your-account>
 #SBATCH --nodes=2
-#SBATCH --ntasks-per-node=4
+#SBATCH --ntasks-per-node=128
+#SBATCH --mem=320G
 #SBATCH --gpus-per-node=4
 #SBATCH --time=04:00:00
 #SBATCH --job-name=cudaq_mgpu_8gpu
@@ -287,7 +292,8 @@ for a full working example.
 #!/bin/bash
 #SBATCH --account=<your-account>
 #SBATCH --nodes=2
-#SBATCH --ntasks-per-node=2
+#SBATCH --ntasks-per-node=64
+#SBATCH --mem=160G
 #SBATCH --gpus-per-node=2
 #SBATCH --time=04:00:00
 #SBATCH --job-name=cudaq_mpi4py
