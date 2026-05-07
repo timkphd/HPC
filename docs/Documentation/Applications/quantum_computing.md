@@ -111,7 +111,54 @@ for g in ['cx', 'cz', 'cry']:
 result = cudaq.sample(bell, shots_count=1000, noise_model=noise)
 ```
 
-### Multi-GPU Statevector (large circuits)
+### Multi-QPU Shot-Parallel (mqpu)
+
+The `mqpu` option assigns shots to multiple GPUs in parallel. Each GPU holds its own
+copy of the full statevector and executes an independent subset of shots — useful
+for shot-noisy sweeps where the circuit fits in a single GPU's memory.
+
+```python
+import cudaq
+
+# Each of the 4 GPUs handles ~shots/4 shots independently
+cudaq.set_target('nvidia', option='mqpu')
+
+@cudaq.kernel
+def ansatz(theta: float):
+    q = cudaq.qvector(28)
+    h(q[0])
+    ry(theta, q[1])
+    cx(q[1], q[0])
+    mz(q)
+
+result = cudaq.sample(ansatz, 0.5, shots_count=4096)
+cudaq.mpi.finalize()
+```
+
+```bash
+#SBATCH --nodes=1
+#SBATCH --ntasks=4
+#SBATCH --gpus-per-node=4
+
+module load qiskit/aer-gpu
+srun python3 my_mqpu_script.py
+```
+
+!!! note "mqpu vs mpi4py vs mgpu"
+    | Strategy | When to use | Circuit size |
+    |----------|-------------|-------------|
+    | `mqpu` | Shot-parallel, built-in CUDA-Q, no MPI boilerplate | Fits in 1 GPU |
+    | `mpi4py` shot-split | Noisy simulation, fine-grained rank control | Fits in 1 GPU |
+    | `mgpu` | Circuit exceeds single-GPU memory | > 30 qubits |
+
+    For noisy circuits that fit in one GPU (≤28 qubits), **`mpi4py` shot-splitting
+    typically outperforms `mqpu`** due to lower inter-process overhead.
+    See the [parallelisation report](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/parallelisation_report.md)
+    for benchmarks on Kestrel H100s.
+
+---
+
+### Multi-GPU Statevector (mgpu)
 
 The `mgpu` option of the `nvidia` target distributes the statevector across multiple
 GPUs using cuStateVec, enabling simulation of circuits that exceed single-GPU memory:
@@ -126,7 +173,7 @@ On Kestrel, multi-GPU requires GPU-aware MPI via the Cray GTL library. Use the
 wrapper script below to set the required environment variables **before** Python
 starts — they cannot be set with `os.environ` inside the script.
 
-**`run_mgpu.sh`:**
+**[`run_mgpu.sh`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/run_mgpu.sh):**
 ```bash
 #!/bin/bash
 export MPICH_GPU_SUPPORT_ENABLED=1
@@ -137,7 +184,7 @@ export CUDAQ_MGPU_COMM_PLUGIN_TYPE=MPICH
 exec python3 "$@"
 ```
 
-**Script using mgpu:**
+**[Script using mgpu](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/test_mgpu.py):**
 ```python
 import cudaq
 cudaq.set_target('nvidia', option='mgpu,fp32')
@@ -221,7 +268,9 @@ srun bash run_mgpu.sh my_cudaq_mgpu_script.py
 ### Multi-Node Shot-Parallel (noisy, mpi4py) — CUDA-Q
 
 For noisy trajectory simulation with many shots, splitting shots across MPI ranks
-(one rank per GPU) gives near-linear speedup:
+(one rank per GPU) gives near-linear speedup. See
+[`bench_mpi4py_dqa.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/bench_mpi4py_dqa.py)
+for a full working example.
 
 ```bash
 #!/bin/bash
@@ -302,7 +351,20 @@ python3 your_script.py
 
 ## Additional Resources
 
+**NVIDIA / IBM documentation:**
+
 - [CUDA-Q documentation](https://nvidia.github.io/cuda-quantum/)
 - [Qiskit documentation](https://docs.quantum.ibm.com/)
 - [qiskit-aer documentation](https://qiskit.github.io/qiskit-aer/)
 - [cuQuantum SDK](https://developer.nvidia.com/cuquantum-sdk)
+
+**NLR example code (Kestrel-tested):**
+
+- [`run_mgpu.sh`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/run_mgpu.sh) — Cray GTL wrapper for mgpu
+- [`test_mgpu.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/test_mgpu.py) — GHZ circuit on nvidia mgpu target
+- [`bench_mgpu_dqa.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/bench_mgpu_dqa.py) — DQA benchmark: noiseless + noisy mgpu timing
+- [`bench_mpi4py_dqa.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/bench_mpi4py_dqa.py) — DQA benchmark: mpi4py shot-splitting
+- [`parallelisation_report.md`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/parallelisation_report.md) — Full benchmark comparison (mqpu / mpi4py / mgpu) on Kestrel H100s
+- [`binary_optimizer.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/binary_optimizer.py) — CUDA-Q QAE-based stochastic optimiser
+- [`qae.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/qae.py) — Quantum Amplitude Estimation circuits
+- [`resource_estimator.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/resource_estimator.py) — Gate/qubit resource estimation utilities
