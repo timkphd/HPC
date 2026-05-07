@@ -32,6 +32,7 @@ The following are packages that the NLR Computational Science Center supports:
 | [OpenFOAM](./openfoam.md) | Software for computational fluid dynamics | 
 | [PLEXOS](./Plexos/index.md) | Simulation software for modeling electric, gas, and water systems for optimizing energy markets | 
 | [Q-Chem](./qchem.md)    |  *ab initio* quantum chemistry package for predicting molecular structures, reactivities, and vibrational, electronic and NMR spectra | 
+| [Quantum Computing](./quantum_computing.md) | GPU-accelerated quantum circuit simulation via Qiskit Aer, CUDA-Q, and cuQuantum (cuStateVec) on H100 GPUs |
 | [<nobr>STAR-CCM+</nobr>](./starccm.md) | Engineering simulation package from CD-adapco for solving problems involving flow of fluids or solids, heat transfer, and stress | 
 | [VASP](./vasp.md) | Atomic scale materials modeling, e.g., electronic structure calculations and quantum-mechanical molecular dynamics, from first principles | 
 | [WRF](./wrf.md) | Mesoscale numerical weather prediction system designed for both atmospheric research and operational forecasting applications | 

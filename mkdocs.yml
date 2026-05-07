@@ -110,6 +110,7 @@ nav:
             - Setting Up: Documentation/Applications/Plexos/setup_plexos.md
             - Running Models: Documentation/Applications/Plexos/run_plexos.md
           - Q-Chem:     Documentation/Applications/qchem.md
+          - Quantum Computing: Documentation/Applications/quantum_computing.md
           - STAR-CCM+:  Documentation/Applications/starccm.md
           - VASP:       Documentation/Applications/vasp.md
           - WRF:        Documentation/Applications/wrf.md
