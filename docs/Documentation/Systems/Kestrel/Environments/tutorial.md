@@ -33,7 +33,7 @@ Kestrel comes pre-packaged with several "programming environments." You can see 
 We're going to walk through building and running an MPI benchmarking code called IMB. This is a simple code that only requires a compiler and an MPI as dependencies (no scientific libraries, etc. are needed).
 
 First, log onto Kestrel with
-`ssh [your username]@kestrel.hpc.nrel.gov`
+`ssh [your username]@kestrel.hpc.nlr.gov`
 
 Let's grab an interactive node session:
 
