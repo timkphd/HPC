@@ -89,7 +89,7 @@ In this model, the HPC does the I/O and computational work, then "serves" the re
     Open a new local terminal window:
     
     ```bash
-    ssh -L 11111:<node_name>:11111 <username>@kestrel.hpc.nrel.gov
+    ssh -L 11111:<node_name>:11111 <username>@kestrel.hpc.nlr.gov
     ```
     
     where `<node_name>` is the node name you copied in Step 1 and `<username>` is your HPC username.
@@ -142,7 +142,7 @@ How to use ParaView in batch mode to generate single frames and animations on Ke
 1.  Begin by connecting to a Kestrel login node:
 
     ```bash
-    ssh <username>@kestrel.hpc.nrel.gov
+    ssh <username>@kestrel.hpc.nlr.gov
     ```
 
 2.  Request an interactive compute session for 60 minutes:
