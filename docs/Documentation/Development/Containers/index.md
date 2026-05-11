@@ -83,7 +83,7 @@ tar czf simple_python3.tar.gz simple_python3.tar
 Now that the exported Docker image is compressed to `.tar.gz` format, you will need to transfer it to one of NLR's HPC systems. Considering the [scratch space](../../Systems/Kestrel/Filesystems/index.md#scratchfs) of [Kestrel](../../Systems/Kestrel/index.md) as an example destination, we will use `rsync` as the transfer method. Be sure to replace `USERNAME` with your unique HPC username:
 
 ```
-rsync -aP --no-g simple_python3.tar.gz USERNAME@kestrel.hpc.nrel.gov:/scratch/USERNAME/
+rsync -aP --no-g simple_python3.tar.gz USERNAME@kestrel.hpc.nlr.gov:/scratch/USERNAME/
 ```
 
 For more information on alternatives to `rsync` (such as FileZilla or Globus), please refer to our [documentation regarding file transfers](../../Managing_Data/Transferring_Files/index.md).

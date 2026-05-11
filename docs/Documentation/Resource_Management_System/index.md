@@ -4,7 +4,7 @@
 
 ## Access
 
-An [NLR HPC account](https://www.nlr.gov/hpc/user-accounts.html) is required to access Lex. To log in to Lex, open a web browser to [https://hpcprojects.nrel.gov](https://hpcprojects.nrel.gov/login/?next=/). Log in with your NLR HPC username and password. An OTP token is not required to authenticate. 
+An [NLR HPC account](https://www.nlr.gov/hpc/user-accounts.html) is required to access Lex. To log in to Lex, open a web browser to [https://hpcprojects.nlr.gov](https://hpcprojects.nlr.gov/login/?next=/). Log in with your NLR HPC username and password. An OTP token is not required to authenticate. 
 
 ## Requesting an Allocation
 

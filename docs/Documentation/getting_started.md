@@ -45,13 +45,13 @@ Below we've collected answers for many of the most frequently asked questions.
     lasting 60 seconds) token to use along with your account password. Tokens are generated
     using the current time stamp and a secure hashing algorithm.  **Note that you only need an 
     OTP to access systems outside the NLR firewall**, namely if you are an external collaborator. 
-    NLR employees can be on-site or use a VPN to access HPC systems via the *.hpc.nrel.gov domain.
+    NLR employees can be on-site or use a VPN to access HPC systems via the *.hpc.nlr.gov domain.
 
 ??? note "What is a virtual private network (VPN)?"
 
     VPNs simulate being within a firewall (which is an aggressive filter on inbound network
     traffic) by encapsulating your traffic in a secure channel that funnels through the
-    NLR network. While connected to a VPN, internal network domains such as *.hpc.nrel.gov
+    NLR network. While connected to a VPN, internal network domains such as *.hpc.nlr.gov
     can be accessed without secondary authentication (as the VPN itself counts as a secondary
     authentication). NLR employees may use the NLR VPN while external collaborators
     may use the NLR HPC VPN using their OTP token. This provides the convenience of not

@@ -16,7 +16,7 @@ For a general introduction to using Jupyter notebooks on Kestrel, please refer t
 
 Login to Kestrel
 ```
-$ ssh -X <username>@kestrel-gpu.hpc.nrel.gov
+$ ssh -X <username>@kestrel-gpu.hpc.nlr.gov
 ```
 
 Navigate to your /projects directory
@@ -167,7 +167,7 @@ The text in the red box shows an example of the output parameter `<nodename>` an
 
 2. Local terminal: Establish a SSH tunnel
     ```
-    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel-gpu.hpc.nrel.gov
+    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel-gpu.hpc.nlr.gov
     ```
 
 3. Web browser
@@ -197,7 +197,7 @@ The text in the red box shows an example of the output parameter `<nodename>` an
 
 2. Local terminal: Establish a SSH tunnel
     ```
-    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel.hpc.nrel.gov
+    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel.hpc.nlr.gov
     ```
 
 3. Web browser
@@ -221,7 +221,7 @@ The text in the red box shows an example of the output parameter `<nodename>` an
 
 2. Local terminal: Establish a SSH tunnel
     ```
-    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel.hpc.nrel.gov
+    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel.hpc.nlr.gov
     ```
 
 3. Web browser
@@ -245,7 +245,7 @@ The text in the red box shows an example of the output parameter `<nodename>` an
 
 2. Local terminal: Establish a SSH tunnel
     ```
-    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel-gpu.hpc.nrel.gov
+    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel-gpu.hpc.nlr.gov
     ```
 
 3. Web browser

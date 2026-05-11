@@ -154,7 +154,7 @@ export LD_LIBRARY_PATH=/projects/mystuff/lib:$LD_LIBRARY_PATH
 If you have a commercial application that requires a license server you may need to set a variable to point to it.  For example:
 
 ```
-export LSERVER=license-1.hpc.nrel.gov:4691
+export LSERVER=license-1.hpc.nlr.gov:4691
 ```
 
 

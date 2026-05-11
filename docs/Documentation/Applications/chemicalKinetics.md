@@ -68,7 +68,7 @@ $ conda deactivate
 ```
 ??? example "[Example interactive jupyter usage](../Development/Jupyter/index.md)"
 	```
-	$ ssh username@kestrel.hpc.nrel.gov
+	$ ssh username@kestrel.hpc.nlr.gov
 	```
 	To access your scratch from the jupyter notebook, execute the following from your Kestrel home directory (optional)
 	```
@@ -82,7 +82,7 @@ $ conda deactivate
 	```
 	$ python -m ipykernel install --user --name=ct-env
 	```
-	In a browser, go to [Kestrel JupyterHub](https://kestrel-jhub.hpc.nrel.gov/), select “ct-env” in the Notebook section to open a new jupyter notebook with the ‘ct-env’ loaded
+	In a browser, go to [Kestrel JupyterHub](https://kestrel-jhub.hpc.nlr.gov/), select “ct-env” in the Notebook section to open a new jupyter notebook with the ‘ct-env’ loaded
 
 	Try Cantera python API within the notebook, for example,
 	```
@@ -106,7 +106,7 @@ $ g++ demo.cpp -o demo $(pkg-config --cflags --libs cantera) && ./demo
 
 ??? example "[Example interactive C++ usage](https://www.nlr.gov/hpc/running-jobs.html)"
 	```
-	$ ssh username@kestrel.hpc.nrel.gov
+	$ ssh username@kestrel.hpc.nlr.gov
 	```
 	Allocate resources
 	```

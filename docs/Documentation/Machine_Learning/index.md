@@ -212,7 +212,7 @@ Regardless of architecture, installing an accelerated version PyTorch on Gila is
 ??? example "Creating an arm-based PyTorch environment for Grace Hopper nodes on Gila"
     ```
     # Connect to the arm login node
-    ssh gila-arm.hpc.nrel.gov
+    ssh gila-arm.hpc.nlr.gov
     
     # Request partial Grace Hopper node for 15 minutes to create arm-based environment
     # Replace <allocation handle> accordingly

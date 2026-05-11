@@ -19,7 +19,7 @@ Input commands are preceded by a `$`.
 ##### Allocate a compute node.
 
 ```
-$ ssh USERNAME@kestrel.hpc.nrel.gov
+$ ssh USERNAME@kestrel.hpc.nlr.gov
 [USERNAME@kl1 ~]$ salloc --exclusive --mem=0 --tasks-per-node=104 --nodes=1 --time=01:00:00 --account=MYACCOUNT --partition=debug
 [USERNAME@x1000c0s0b0n0 ~]$ cat /etc/redhat-release
 Red Hat Enterprise Linux release 8.6 (Ootpa)

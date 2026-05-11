@@ -2,7 +2,7 @@
 
 ## Home Directories: /home
 
-`/home` directories are mounted as `/home/<username>`. To check your usage in your /home directory, visit the [Gila Filesystem Dashboard](https://influx.hpc.nrel.gov/d/ch4vndd/ceph-filesystem-quotas?folderUid=fexgrdi5pt91ca&orgId=1&from=now-1h&to=now&timezone=browser&tab=queries). You can also check your home directory usage and quota by running the following commands: 
+`/home` directories are mounted as `/home/<username>`. To check your usage in your /home directory, visit the [Gila Filesystem Dashboard](https://influx.hpc.nlr.gov/d/ch4vndd/ceph-filesystem-quotas?folderUid=fexgrdi5pt91ca&orgId=1&from=now-1h&to=now&timezone=browser&tab=queries). You can also check your home directory usage and quota by running the following commands: 
 
 ```
 # Check usage
@@ -15,7 +15,7 @@ If you need a quota increase in your home directory, please contact [HPC-Help@nl
 
 ## Project Storage: /projects
 
-Each active project is granted a subdirectory under `/projects/<projectname>`. There are currently no quotas on `/projects` directories. Please monitor your space usage at the [Gila Filesystem Dashboard](https://influx.hpc.nrel.gov/d/ch4vndd/ceph-filesystem-quotas?folderUid=fexgrdi5pt91ca&orgId=1&from=now-1h&to=now&timezone=browser&tab=queries). 
+Each active project is granted a subdirectory under `/projects/<projectname>`. There are currently no quotas on `/projects` directories. Please monitor your space usage at the [Gila Filesystem Dashboard](https://influx.hpc.nlr.gov/d/ch4vndd/ceph-filesystem-quotas?folderUid=fexgrdi5pt91ca&orgId=1&from=now-1h&to=now&timezone=browser&tab=queries). 
 
 Note that there is currently no `/projects/aurorahpc` directory. Data can be kept in your `/home` directory. 
 

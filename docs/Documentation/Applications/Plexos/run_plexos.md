@@ -93,7 +93,7 @@ We will run the same example by submitting the job to the SLURM queue. This exam
 
     ```bash
     # SSH into Kestrel or your cluster of choice
-    ssh $USER@kestrel.hpc.nrel.gov
+    ssh $USER@kestrel.hpc.nlr.gov
 
     # Clone the HPC master branch in your scratch folder
     cd /scratch/${USER}/
@@ -112,7 +112,7 @@ This builds upon the previous example where it tries to run the same model as be
 
     ```bash
     # Skip this if you already have the repo cloned in your scratch directory
-    ssh $USER@kestrel.hpc.nrel.gov
+    ssh $USER@kestrel.hpc.nlr.gov
     cd /scratch/${USER}/
     git clone git@github.com:NREL/HPC.git
 
@@ -129,7 +129,7 @@ This example demonstrates how to submit multiple PLEXOS jobs. The model names ar
 
     ```bash
     # Skip this if you already have the repo cloned in your scratch directory
-    ssh $USER@kestrel.hpc.nrel.gov
+    ssh $USER@kestrel.hpc.nlr.gov
     cd /scratch/${USER}/
     git clone git@github.com:NREL/HPC.git
 
@@ -146,7 +146,7 @@ This example demonstrates the use of SLURM job arrays to run multiple PLEXOS job
 
     ```bash
     # Skip this if you already have the repo cloned in your scratch directory
-    ssh $USER@kestrel.hpc.nrel.gov
+    ssh $USER@kestrel.hpc.nlr.gov
     cd /scratch/${USER}/
     git clone git@github.com:NREL/HPC.git
 

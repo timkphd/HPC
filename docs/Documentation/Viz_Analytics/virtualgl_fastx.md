@@ -8,7 +8,7 @@ In addition to standard ssh-only login nodes, Kestrel is also equipped with seve
 !!! Note About Usage
     DAV FastX nodes are a limited resource and not intended as a general-purpose remote desktop. We ask that you please restrict your usage to only HPC allocation-related work and/or visualization software that requires an HPC system.
 
-There are seven internal DAV nodes on Kestrel available only to NLR users on the NLR VPN, on campus, or via the [HPC VPN](https://www.nlr.gov/hpc/vpn-connection.html) that are accessible via round-robin at **kestrel-dav.hpc.nrel.gov**. The individual nodes are named kd1 through kd7.hpc.nrel.gov.
+There are seven internal DAV nodes on Kestrel available only to NLR users on the NLR VPN, on campus, or via the [HPC VPN](https://www.nlr.gov/hpc/vpn-connection.html) that are accessible via round-robin at **kestrel-dav.hpc.nlr.gov**. The individual nodes are named kd1 through kd7.hpc.nlr.gov.
 
 There is also one node that is ONLY accessible by external (non-NLR) users available at **kestrel-dav.nlr.gov**. This address will connect to the node kd8, and requires both password and OTP for login. 
 
@@ -32,7 +32,7 @@ NLR users may use the web browser or the FastX desktop client. External users mu
 ??? abstract "NLR On-Site and VPN Users" 
     ### Using a Web Browser
 
-    Launch a web browser on your local machine and connect to [https://kestrel-dav.hpc.nrel.gov](https://kestrel-dav.hpc.nrel.gov). After logging in with your HPC username/password you will be able to launch a FastX session by choosing a desktop environment of your choice. Either [GNOME](https://www.gnome.org/) or [XFCE](https://www.xfce.org/) are available for use.
+    Launch a web browser on your local machine and connect to [https://kestrel-dav.hpc.nlr.gov](https://kestrel-dav.hpc.nlr.gov). After logging in with your HPC username/password you will be able to launch a FastX session by choosing a desktop environment of your choice. Either [GNOME](https://www.gnome.org/) or [XFCE](https://www.xfce.org/) are available for use.
 
 
     ### Using the Desktop Client 
@@ -54,7 +54,7 @@ NLR users may use the web browser or the FastX desktop client. External users mu
 
     Give your profile a name and enter the settings...
 
-    Address/URL: *kestrel-dav.hpc.nrel.gov*
+    Address/URL: *kestrel-dav.hpc.nlr.gov*
 
     OR you may use the address of an individual kd or ed node if you would like to resume a previous session.
 
@@ -179,7 +179,7 @@ nodes that you are not using, or your sessions may be terminated by system admin
 active users. 
 
 ## Reattaching FastX Sessions
-Connections to the DAV nodes via kestrel-dav.hpc.nrel.gov will connect you to a random node. To resume a session that you have suspended, take note of the node your session is running on (kd1, kd2, kd3, kd4, kd5, kd6, or kd7) before you close the FastX client or browser window, and you may directly access that node when you are ready to reconnect at e.g. `kd#.hpc.nrel.gov` in the FastX client or through your web browser at `https://kd#.hpc.nrel.gov`. 
+Connections to the DAV nodes via kestrel-dav.hpc.nlr.gov will connect you to a random node. To resume a session that you have suspended, take note of the node your session is running on (kd1, kd2, kd3, kd4, kd5, kd6, or kd7) before you close the FastX client or browser window, and you may directly access that node when you are ready to reconnect at e.g. `kd#.hpc.nlr.gov` in the FastX client or through your web browser at `https://kd#.hpc.nlr.gov`. 
 
 ## Compute Intensive GUI Applications
 

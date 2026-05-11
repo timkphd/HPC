@@ -63,7 +63,7 @@ $ git clone https://github.com/nileshsawant/marblesThermal
 
 To install the latest development version of MARBLES, the code has to be built on a GPU login node. Please do the following:
 ```
-$ ssh -X <username>@kestrel-gpu.hpc.nrel.gov
+$ ssh -X <username>@kestrel-gpu.hpc.nlr.gov
 $ module load PrgEnv-gnu/8.5.0
 $ module load cuda/12.3
 $ module load craype-x86-milan

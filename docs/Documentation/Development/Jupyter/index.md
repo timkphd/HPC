@@ -88,7 +88,7 @@ KJHub is available from the NLR VPN (onsite or offsite) for internal NLR users.
 
 This service is not directly accessible externally for non-NLR HPC users. However, it may be reached by using the [HPC VPN](https://www.nlr.gov/hpc/vpn-connection.html), or by using a [FastX Remote Desktop](../../Viz_Analytics/virtualgl_fastx.md) session via the DAV nodes.
 
-The JupyterHub service is accessible via web browser at [https://kestrel-jhub.hpc.nrel.gov](https://kestrel-jhub.hpc.nrel.gov)
+The JupyterHub service is accessible via web browser at [https://kestrel-jhub.hpc.nlr.gov](https://kestrel-jhub.hpc.nlr.gov)
 
 ### JupyterHub Advantages:
 
@@ -105,7 +105,7 @@ The JupyterHub service is accessible via web browser at [https://kestrel-jhub.hp
    
 ### Simple Instructions to access JupyterHub:
     
-* Visit [https://kestrel-jhub.hpc.nrel.gov](https://kestrel-jhub.hpc.nrel.gov/) in a web browser and log in using your HPC credentials.
+* Visit [https://kestrel-jhub.hpc.nlr.gov](https://kestrel-jhub.hpc.nlr.gov/) in a web browser and log in using your HPC credentials.
    
 KJHub opens a standard JupyterLab interface by default. Change the url ending from "/lab" to "/tree" in your web browser to switch to the classic Notebooks interface.
 
@@ -132,7 +132,7 @@ Before you get started, we recommend installing your own Jupyter inside of a con
 
 Internal (NLR) HPC users on the NLR VPN, or external users of the HPC VPN, may use the instructions below.
 
-External (non-NLR) HPC users may follow the same instructions, but please use `kestrel.nlr.gov` in place of `kestrel.hpc.nrel.gov`.
+-External (non-NLR) HPC users may follow the same instructions, but please use `kestrel.nlr.gov` in place of `kestrel.hpc.nlr.gov`.
 
 ## Using a Compute Node to run Jupyter Notebooks
 
@@ -145,7 +145,7 @@ The examples below will start a 2-hour job. Edit the `<account>` to the name of 
 
 Connect to the login node and launch an interactive job:
 
-`[user@laptop:~]$ ssh kestrel.hpc.nrel.gov`
+`[user@laptop:~]$ ssh kestrel.hpc.nlr.gov`
 
 `[user@kl1:~]$ salloc -A <account> -t 02:00:00`
 
@@ -170,7 +170,7 @@ The `<alphabet soup>` is a long string of letters and numbers. This is a unique 
 
 Next, open an SSH tunnel through a login node to the compute node. Log in when prompted using your regular HPC credentials, and put this terminal to the side or minimize it, but leave it open until you are done working with Jupyter for this session.
 
-`[user@laptop:~]$ ssh -N -L 8888:<nodename>:8888 username@kestrel.hpc.nrel.gov`
+`[user@laptop:~]$ ssh -N -L 8888:<nodename>:8888 username@kestrel.hpc.nlr.gov`
 
 ### Open a Web Browser
 

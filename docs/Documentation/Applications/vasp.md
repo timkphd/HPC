@@ -149,7 +149,7 @@ CPU $ module avail vasp
 
 !!! tip "Important"
 	Submit GPU jobs from a [GPU login node](../Systems/Kestrel/index.md).
-    `$ ssh <username>@kestrel-gpu.hpc.nrel.gov`
+    `$ ssh <username>@kestrel-gpu.hpc.nlr.gov`
 
 There are several modules for GPU builds of VASP 5 and VASP 6: 
 

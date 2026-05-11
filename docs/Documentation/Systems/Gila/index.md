@@ -13,11 +13,11 @@ The aurorahpc allocation does have limited resources allowed per job. These limi
 #### For NLR Employees:
 To access Gila, log in to the NLR network and connect via ssh to:
 
-    gila.hpc.nrel.gov
+    gila.hpc.nlr.gov
 
 To use the Grace Hopper nodes, connect via ssh to:
 
-    gila-arm.hpc.nrel.gov
+    gila-arm.hpc.nlr.gov
 
 #### For External Collaborators:
 There are no external-facing login nodes for Gila. There are two options to connect:
