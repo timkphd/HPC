@@ -146,6 +146,8 @@ cudaq.mpi.finalize()
 ```
 
 ```bash
+#SBATCH --account=<your-account>
+#SBATCH --time=01:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=128
 #SBATCH --mem=320G
