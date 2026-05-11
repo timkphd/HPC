@@ -26,7 +26,7 @@ If you have an existing allocation that you need to continue for the next fiscal
 
 ### Request Type
 
-Most allocations will be standard requests. Select a different request type only if your project qualtifies as a Pilot or Student request. 
+Most allocations will be standard requests. Select a different request type only if your project qualifies as a Pilot or Student request. 
 
 ![image](../../assets/images/Lex/request_type.png)
 
