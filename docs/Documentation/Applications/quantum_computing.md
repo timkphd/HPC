@@ -164,7 +164,7 @@ srun python3 my_mqpu_script.py
 
     For noisy circuits that fit in one GPU (≤28 qubits), **`mpi4py` shot-splitting
     typically outperforms `mqpu`** due to lower inter-process overhead.
-    See the [parallelisation report](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/parallelisation_report.md)
+    See the [parallelization report](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/parallelisation_report.md)
     for benchmarks on Kestrel H100s.
 
 ### Multi-GPU Statevector (mgpu)
