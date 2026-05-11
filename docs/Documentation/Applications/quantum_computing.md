@@ -20,7 +20,7 @@ simulation and hybrid quantum-classical algorithms:
 ---
 
 ## Loading the Module
-
+Please use only a GPU login node or an allocated GPU node to use the quantum computing module. 
 ```bash
 module load qiskit/aer-gpu
 python3 your_script.py
