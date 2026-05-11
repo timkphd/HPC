@@ -10,7 +10,7 @@ Press "F1" to open the command bar, and type or search for `Remote-SSH: Connect 
 
 You may then enter your HPC username and the address of an HPC system to connect to. 
 
-* To connect to Kestrel from the NLR VPN, enter `username@kestrel.hpc.nrel.gov`, replacing "username" with your HPC user name.
+* To connect to Kestrel from the NLR VPN, enter `username@kestrel.hpc.nlr.gov`, replacing "username" with your HPC user name.
 
 * To connect to Kestrel as an external collaborator, enter `username@kestrel.nlr.gov`, replacing "username" with your HPC user name.
 
@@ -23,7 +23,7 @@ Enter your HPC password (or password and OTP code if external) and you will be c
     Some people who use Windows 10/11 computers to ssh to Kestrel via Visual Studio Code's SSH extension might receive an error message about a "Corrupted MAC on input" or "message authentication code incorrect." To workaround this issue, you will need to create an ssh config file on your local computer, `~/.ssh/config`, with a host entry for Kestrel that specifies a new message authentication code:
     ```
     Host kestrel
-        HostName kestrel.hpc.nrel.gov
+        HostName kestrel.hpc.nlr.gov
         MACs hmac-sha2-512
     ```
     This [Visual Studio Blog post](https://code.visualstudio.com/blogs/2019/10/03/remote-ssh-tips-and-tricks) has further instructions on how to create the ssh configuration file for Windows and VS Code.
@@ -48,9 +48,9 @@ We recommend choosing a strong passphrase and storing it in a password manager. 
     Do **not** replace the key pair in your Kestrel home directory. These keys are generated when you log into the cluster, and are used by Slurm jobs to communicate between nodes. There is a corresponding public key entry in your cluster home directory ~/.ssh/authorized_keys that must also be left in place.
 
 !!! note "Reminder About Passwords"
-    Using an SSH key with an SSH agent can remove the need to use a password to SSH to Kestrel. However, not all HPC services (including [Lex](https://hpcprojects.nrel.gov)) use SSH keys. **An SSH key does NOT replace your HPC account password**. You **must** maintain a regular HPC account password in accordance with our [Appropriate Use Policy](https://www.nlr.gov/hpc/appropriate-use-policy.html) and [User Account Password Guidelines](https://www.nlr.gov/hpc/user-account-passwords.html). Ignoring password expiration date notices will lead to automatic account lockouts, and you will need to contact [HPC Support](/Documentation/help) to restore your account.
+    Using an SSH key with an SSH agent can remove the need to use a password to SSH to Kestrel. However, not all HPC services (including [Lex](https://hpcprojects.nlr.gov)) use SSH keys. **An SSH key does NOT replace your HPC account password**. You **must** maintain a regular HPC account password in accordance with our [Appropriate Use Policy](https://www.nlr.gov/hpc/appropriate-use-policy.html) and [User Account Password Guidelines](https://www.nlr.gov/hpc/user-account-passwords.html). Ignoring password expiration date notices will lead to automatic account lockouts, and you will need to contact [HPC Support](/Documentation/help) to restore your account.
 
-Once you have a key pair on your local computer, use the `ssh-copy-id <username>@kestrel.hpc.nrel.gov` command to copy the public portion to Kestrel. This will add your public key to the ~/.ssh/authorized_keys file in your Kestrel home directory. Alternatively, you may manually add the contents of your PUBLIC key file (for example, the contents of ~/.ssh/id_ed25519.pub or ~/.ssh/id_rsa.pub) onto the end of this file. **Do not delete the existing entries in these files on Kestrel.**
+Once you have a key pair on your local computer, use the `ssh-copy-id <username>@kestrel.hpc.nlr.gov` command to copy the public portion to Kestrel. This will add your public key to the ~/.ssh/authorized_keys file in your Kestrel home directory. Alternatively, you may manually add the contents of your PUBLIC key file (for example, the contents of ~/.ssh/id_ed25519.pub or ~/.ssh/id_rsa.pub) onto the end of this file. **Do not delete the existing entries in these files on Kestrel.**
 
 ### Editing the VS Code SSH Config File
 
@@ -60,7 +60,7 @@ Use the remote-ssh command to edit your VS Code ssh config file (~/.ssh/config).
 
 ```
 Host x????c*
-    ProxyJump <username>@kestrel.hpc.nrel.gov
+    ProxyJump <username>@kestrel.hpc.nlr.gov
 ```
 
 This create a "wildcard" entry that should match Kestrel compute node names. Any time an ssh command is issued on your computer that matches the wildcard, the ssh connection will "jump" through a Kestrel login node and directly to the compute node.
