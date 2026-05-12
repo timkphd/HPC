@@ -175,7 +175,61 @@ Please note that `--gpu-ids "0,1"` lists the IDs of the GPUs to use — adjust t
 
 ## Installation and Usage on Gila
 
-[Gila](../Systems/Gila/index.md) is an OpenHPC-based cluster at NLR with several GPU node types, including NVIDIA A100 and AMD MI210/MI250 nodes. MARBLES supports AMD GPUs via the HIP/ROCm backend inherited from AMReX. M-Star runs on the A100 nodes via a dedicated module.
+[Gila](../Systems/Gila/index.md) is an OpenHPC-based cluster at NLR with several GPU node types, including NVIDIA Grace Hopper (GH200), A100, and AMD MI210/MI250 nodes. MARBLES supports NVIDIA GPUs via the CUDA backend and AMD GPUs via the HIP/ROCm backend, both inherited from AMReX. M-Star runs on the A100 nodes via a dedicated module.
+
+### NLR MARBLES on Gila (NVIDIA Grace Hopper GH200)
+
+MARBLES can be compiled for the NVIDIA GH200 GPU on Gila's `gh` partition. The Grace Hopper nodes run on ARM64 (NVIDIA Grace CPU), so the application **must** be compiled directly on a `gh` compute node — it cannot be cross-compiled from the x86-64 login nodes. Build from the `gila-arm.hpc.nlr.gov` login node.
+
+Request an interactive session on a Grace Hopper node (14 cores = 1/5 of the node):
+```
+$ salloc -A <projectname> -t 01:00:00 --nodes=1 --ntasks-per-node=14 --mem=94G --gres=gpu:1 --partition=gh
+```
+
+Once on the compute node, load the required modules:
+```
+$ module load gcc/14.2.0
+$ module load cuda/12.9.0
+```
+
+!!! warning
+    Do **not** set `AMREX_HOME` in your environment. MARBLES ships AMReX as a git submodule pinned to a tested commit. Setting `AMREX_HOME` overrides this and will likely cause compile errors. If you have it set from another workflow, unset it before building:
+    ```
+    $ unset AMREX_HOME
+    ```
+
+Clone MARBLES and initialize the bundled AMReX submodule (from the `gila-arm.hpc.nlr.gov` login node before requesting the allocation, or after):
+```
+$ module load git
+$ cd /projects/<projectname>/<username>/
+$ mkdir marblesGH && cd marblesGH
+$ git clone https://github.com/nileshsawant/marblesThermal
+$ cd marblesThermal
+$ git submodule update --init --recursive Submodules/AMReX
+```
+
+Build with CUDA targeting the GH200 (Hopper, SM 9.0):
+```
+$ cd Build
+$ make USE_CUDA=TRUE COMP=gnu USE_MPI=FALSE CUDA_ARCH=90
+```
+
+On success, the `Build` directory will contain the CUDA executable, e.g.:
+```
+marbles3d.gnu.TPROF.CUDA.ex
+```
+
+Run a test case (on the allocated compute node):
+```
+$ cp ../Tests/test_files/isothermal_cracks/* .
+$ ./marbles3d.gnu.TPROF.CUDA.ex isothermal_cracks.inp
+```
+
+!!! note
+    `git` is not in the default path on `gila-arm.hpc.nlr.gov`. Load it first with `module load git`.
+
+!!! note
+    See the [Gila Modules page](../Systems/Gila/modules.md) for information on the module system. For partition details and node specifications, see the [Running on Gila page](../Systems/Gila/running.md).
 
 ### NLR MARBLES on Gila (AMD MI250)
 
