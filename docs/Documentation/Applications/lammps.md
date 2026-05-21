@@ -144,7 +144,7 @@ Another sample Slurm script for 1 MPI task CPU node job (i.e. a partial CPU node
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=1G
 #SBATCH --time=00:20:00
-#SBATCH --account=[your_allocation_name]
+#SBATCH --account=<your_allocation_name>
 #SBATCH --partition=amd
  
 export OMP_NUM_THREADS=1
