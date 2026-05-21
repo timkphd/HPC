@@ -136,17 +136,6 @@ $ module load mstar
 $ mpirun --map-by ppr:2:node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 2 mstar-cfd-mgpu --disable-ipc -i input.xml -o out --gpu-ids "0,1"
 ```
 
-###### Multiple nodes, one GPU per node
-To spread across multiple nodes with one GPU per node,
-```
-$ salloc -A <projectname> -t 00:30:00 --nodes=2 --ntasks-per-node=32 --mem=80G --gres=gpu:1 --partition=debug 
-```
-2. The terminal will display `<username>@<nodename>` when successful.
-```
-$ module load mstar
-$ mpirun --map-by ppr:1:node:PE=1 -x PATH -x LD_LIBRARY_PATH -np 2 mstar-cfd-mgpu --disable-ipc -i input.xml -o out --gpu-ids "0,0" 
-```
-
 ##### Run in batch mode
 Typical command line usage would involve submitting the task as a [batch job](../Slurm/batch_jobs.md). An equivalent batch script example for single-node multi-GPU is below: 
 ```
@@ -172,6 +161,9 @@ Save it to a file named 'jobScipt.sh' and submit it to the queue for execution a
 $ sbatch jobScipt.sh 
 ```
 Please note that `--gpu-ids "0,1"` lists the IDs of the GPUs to use — adjust the list and `-np` count to match the number of GPUs requested. To learn more about command line options, please refer to the [M-Star documentation](https://docs.mstarcfd.com/10_Running_the_Solver/cli.html).  
+
+##### Multiple nodes
+To use multiple nodes, please follow the instructions revealed after loading the `mstar/4.1.15` module. The ability to use M-Star on multiple nodes is currently limited to version `4.1.15` and on Kestrel only.
 
 ## Installation and Usage on Gila
 
