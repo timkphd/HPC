@@ -125,7 +125,7 @@ A sample Slurm script for running LAMMPS on Gila's AMD CPU nodes is given below.
 #SBATCH --tasks-per-node=60
 #SBATCH --exclusive
 #SBATCH --time=00:20:00
-#SBATCH --account=[your_allocation_name]
+#SBATCH --account=<your_allocation_name>
 #SBATCH --partition=amd
 
 export OMP_NUM_THREADS=1
