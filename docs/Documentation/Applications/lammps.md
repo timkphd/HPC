@@ -48,7 +48,7 @@ A sample Slurm script for running LAMMPS on Kestrel GPU nodes is given below:
 #SBATCH --tasks-per-node=8 #Running 8 MPI tasks per node
 #SBATCH --mem=16G #Request memory
 #SBATCH --gres=gpu:2 #Request 2 GPU per node
-#SBATCH -p debug-gpu
+#SBATCH -p debug
 
 module load lammps/072225-gpu
 module list
