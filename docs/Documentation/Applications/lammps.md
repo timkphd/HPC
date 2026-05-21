@@ -116,7 +116,7 @@ $run_cmd $lmp_path -in $name.in >& $name.log
 Please note – the CPU binding and MPICH_OFI_NIC_POLICY being set explicitly allow for extra performance gains on the high-bandwidth partition. If not set, there are still performance gains on the high-bandwidth nodes, just not as much as there would be otherwise. 
 
 ## Sample Gila AMD CPU Partition Slurm Script
-A sample Slurm script for running LAMMPS on Gila's AMD CPU nodes is given below. These jobs must be submitted [from a Gila x86 login node](../Systems/Gila/modules/#x86-vs-arm). This job runs on an entire CPU node. Note that mpirun must currently be used to launch parallel jobs. Also note that multi-node LAMMPS are not currently possible. 
+A sample Slurm script for running LAMMPS on Gila's AMD CPU nodes is given below. These jobs must be submitted [from a Gila x86 login node](../Systems/Gila/modules/#x86-vs-arm). This job runs on an entire CPU node. Note that mpirun must currently be used to launch parallel jobs. Also note that multi-node LAMMPS jobs are not currently possible. 
 
 ```
 #!/bin/bash
