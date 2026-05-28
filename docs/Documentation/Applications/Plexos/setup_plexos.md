@@ -95,7 +95,7 @@ Before we can run PLEXOS, we need to create a license file on the cluster. For t
     ```bash
     mkdir /home/$USER/temporary    
     cd /home/$USER/temporary
-    git clone https://github.com/NREL/rplexos.git
+    git clone https://github.com/NatLabRockies/rplexos
     cd rplexos
     CXX=`which icpc` R CMD INSTALL .
     ```
