@@ -36,11 +36,11 @@ Building Docker or Apptainer images requires root/admin privileges and cannot be
 
 ### Example Docker build workflow for HPC users
 
-Because of the permission limitations described above, it is recommended that HPC users start with building a Docker image locally, e.g., on your laptop. If you are a researcher at NLR and plan to regularly containerize applications, you can request Docker to be installed at the admin-level on your work computer from the [IT Service Portal](https://nrel.servicenowservices.com). This section will describe a simple workflow for building a Docker image locally, exporting it as a `.tar` file, uploading it to Kestrel, and converting it to an Apptainer image for execution on HPC.
+Because of the permission limitations described above, it is recommended that HPC users start with building a Docker image locally, e.g., on your laptop. If you are a researcher at NLR and plan to regularly containerize applications, you can request Docker to be installed at the admin-level on your work computer from the [IT Service Portal](https://nlr.servicenowservices.com). This section will describe a simple workflow for building a Docker image locally, exporting it as a `.tar` file, uploading it to Kestrel, and converting it to an Apptainer image for execution on HPC.
 
 #### 1. Local Docker build
 
-The following [Dockerfile](https://github.com/NREL/HPC/tree/master/docker-examples/simple-python3/Dockerfile) illustrates the build steps to create a small image. In this example, we simply install `python3` into an image based on the Ubuntu operating system (version 22.04):
+The following [Dockerfile](https://github.com/NatLabRockies/HPC/blob/master/docker-examples/simple-python3/Dockerfile) illustrates the build steps to create a small image. In this example, we simply install `python3` into an image based on the Ubuntu operating system (version 22.04):
 
 ```
 # Docker example: save as `Dockerfile` in your working directory
@@ -140,7 +140,7 @@ For more specific information on and best practices for using Apptainer on NLR's
 
 #### 5. A more involved Dockerfile example (CUDA 12.4)
 
-For an example of an image you can build to provide everything needed for CUDA v.12.4, please refer to this [Dockerfile](https://github.com/NREL/HPC/tree/master/docker-examples/cuda-12.4/Dockerfile).
+For an example of an image you can build to provide everything needed for CUDA v.12.4, please refer to this [Dockerfile](https://github.com/NatLabRockies/HPC/blob/master/docker-examples/cuda-12.4/Dockerfile).
 
 ### Using Apptainer as build alternatives to Docker
 
