@@ -23,29 +23,29 @@ Kestrel has two types of login nodes, CPU and GPU, which share the same architec
 
 Users on an NLR device may connect via ssh to Kestrel from the NLR network using:
 
-* kestrel.hpc.nrel.gov (CPU)
-* kestrel-gpu.hpc.nrel.gov (GPU)
+* kestrel.hpc.nlr.gov (CPU)
+* kestrel-gpu.hpc.nlr.gov (GPU)
 
  This will connect to one of the three login nodes using a round-robin load balancing approach. Users also have the option of connecting directly to an individual login node using one of the following names: 
 
-* kl1.hpc.nrel.gov (CPU)
-* kl2.hpc.nrel.gov (CPU)
-* kl3.hpc.nrel.gov (CPU)
-* kl5.hpc.nrel.gov (GPU)
-* kl6.hpc.nrel.gov (GPU)
+* kl1.hpc.nlr.gov (CPU)
+* kl2.hpc.nlr.gov (CPU)
+* kl3.hpc.nlr.gov (CPU)
+* kl5.hpc.nlr.gov (GPU)
+* kl6.hpc.nlr.gov (GPU)
 
 #### For External Collaborators:
 If you are an external HPC user, you will need a [One-Time Password Multifactor token (OTP)](https://www.nlr.gov/hpc/multifactor-tokens.html) for two-factor authentication.
 
 For command line access, you may login directly to **kestrel.nlr.gov**.  Alternatively, you can connect to the [SSH gateway host](https://www.nlr.gov/hpc/ssh-gateway-connection.html) or the [HPC VPN](https://www.nlr.gov/hpc/vpn-connection.html).
 
-To access the GPU login nodes, first connect with one of the methods described above, and then ssh to **kestrel-gpu.hpc.nrel.gov**. 
+To access the GPU login nodes, first connect with one of the methods described above, and then ssh to **kestrel-gpu.hpc.nlr.gov**. 
 
 !!! warning "Windows SSH "Corrupted MAC on input" Error"
     When attempting to SSH, some Windows users experience an error message stating "Corrupted MAC on input" or "message authentication code incorrect." To solve the error, run the ssh command with the flag `-m hmac-sha2-512`. Example below:
 
     ```
-    ssh -m hmac-sha2-512 username@kestrel.hpc.nrel.gov
+    ssh -m hmac-sha2-512 username@kestrel.hpc.nlr.gov
     ```
 
     See the [Workaround blog post](../../../blog/2022-12-19-windows_ssh.md) for further details and information.
@@ -59,7 +59,7 @@ There are eight DAV nodes available on Kestrel, which are nodes intended for HPC
 
 [FastX](../../Viz_Analytics/virtualgl_fastx.md) is available for HPC users to use graphical applications on the DAV nodes.
 
-To connect to a DAV node using the load balancing algorithim, NLR employees can connect to **kestrel-dav.hpc.nrel.gov**. To connect from outside the NLR network, use **kestrel-dav.nlr.gov**. 
+To connect to a DAV node using the load balancing algorithim, NLR employees can connect to **kestrel-dav.hpc.nlr.gov**. To connect from outside the NLR network, use **kestrel-dav.nlr.gov**. 
 
 
 ## Get Help With Kestrel

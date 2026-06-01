@@ -13,7 +13,7 @@ NLR operates three on-premises systems for computational work.
 | Name        | Kestrel |  Swift        | Gila     | 
 | :---------- | :------ |  :----------- | :------------- |
 | OS          | RedHat Enterprise Linux |  Rocky Linux    | Rocky Linux       |
-| Login       | kestrel.hpc.nrel.gov |  swift.hpc.nrel.gov | gila.hpc.nrel.gov |
+| Login       | kestrel.hpc.nlr.gov |  swift.hpc.nlr.gov | gila.hpc.nlr.gov |
 | CPU         | Dual socket Intel Xeon Sapphire Rapids |  Dual AMD EPYC 7532 Rome CPU | Dual AMD EPYC Milan |
 | Cores per CPU Node | 104 cores |  128 cores | Varies by partition | 
 | Interconnect | HPE Slingshot 11 | InfiniBand HDR| 25GbE |

@@ -21,8 +21,8 @@ The two hardware stacks are almost identical in terms of available modules. Howe
 
 To ensure proper module compatibility, connect to the login node corresponding to your target compute architecture:
 
-- **x86 architecture**: Use `gila.hpc.nrel.gov` 
-- **ARM architecture**: Use `gila-arm.hpc.nrel.gov` (Grace Hopper nodes)
+- **x86 architecture**: Use `gila.hpc.nlr.gov` 
+- **ARM architecture**: Use `gila-arm.hpc.nlr.gov` (Grace Hopper nodes)
 
 
 !!! warning

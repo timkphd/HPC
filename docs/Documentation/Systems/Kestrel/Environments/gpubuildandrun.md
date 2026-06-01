@@ -12,7 +12,7 @@ tar -xzf /nopt/nrel/apps/examples/gpu/h100.tgz
 Or you can use git to do a download:
 
 ```bash
-git clone $USER@kestrel.hpc.nrel.gov:/nopt/nrel/apps/examples/gpu/0824 h100
+git clone $USER@kestrel.hpc.nlr.gov:/nopt/nrel/apps/examples/gpu/0824 h100
 ```
 
 After getting the source you can run all of the examples:

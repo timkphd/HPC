@@ -16,7 +16,7 @@ For a general introduction to using Jupyter notebooks on Kestrel, please refer t
 
 Login to Kestrel
 ```
-$ ssh -X <username>@kestrel-gpu.hpc.nrel.gov
+$ ssh -X <username>@kestrel-gpu.hpc.nlr.gov
 ```
 
 Navigate to your /projects directory
@@ -72,6 +72,31 @@ qiskit-aer-gpu : ["Aer is a high performance simulator for quantum circuits writ
 pip install qiskit-aer-gpu
 pip install pylatexenc
 ```
+
+??? note "Experimental: Pre-built qiskit/aer-gpu module"
+
+    A pre-built `qiskit/aer-gpu` module is available on Kestrel as an experimental alternative to the manual pip install above. It provides qiskit-aer-gpu 0.15.1 with qiskit 2.2.3, cuQuantum 26.3.0, CUDA 12.4, and Python 3.11. It is for **GPU nodes only**.
+
+    Load it with:
+    ```
+    module load qiskit/aer-gpu
+    ```
+
+    which will print usage instructions:
+    ```
+    qiskit/aer-gpu loaded (qiskit-aer-gpu 0.15.1 | qiskit 2.2.3 | CUDA 12.4 | H100/sm_90 only)
+
+    Use directly:
+      python3 your_qiskit_script.py
+
+    To add pip packages on top:
+      python3 -m venv /scratch/$USER/qiskit_env --system-site-packages
+      source /scratch/$USER/qiskit_env/bin/activate
+      pip install <your-packages>
+    For conda packages too: see 'module help qiskit/aer-gpu'
+    ```
+
+    The module also inherits PyTorch 2.10.0, mpi4py, NCCL 2.23.4, and all other packages from the `pytorch/2.10.0` module.
 
 CuPy : [“An open-source array library for GPU-accelerated computing with Python”](https://cupy.dev/)
 ```
@@ -142,7 +167,7 @@ The text in the red box shows an example of the output parameter `<nodename>` an
 
 2. Local terminal: Establish a SSH tunnel
     ```
-    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel-gpu.hpc.nrel.gov
+    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel-gpu.hpc.nlr.gov
     ```
 
 3. Web browser
@@ -172,7 +197,7 @@ The text in the red box shows an example of the output parameter `<nodename>` an
 
 2. Local terminal: Establish a SSH tunnel
     ```
-    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel.hpc.nrel.gov
+    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel.hpc.nlr.gov
     ```
 
 3. Web browser
@@ -196,7 +221,7 @@ The text in the red box shows an example of the output parameter `<nodename>` an
 
 2. Local terminal: Establish a SSH tunnel
     ```
-    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel.hpc.nrel.gov
+    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel.hpc.nlr.gov
     ```
 
 3. Web browser
@@ -220,7 +245,7 @@ The text in the red box shows an example of the output parameter `<nodename>` an
 
 2. Local terminal: Establish a SSH tunnel
     ```
-    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel-gpu.hpc.nrel.gov
+    $ ssh -N -L 8888:<nodename>:8888 <username>@kestrel-gpu.hpc.nlr.gov
     ```
 
 3. Web browser

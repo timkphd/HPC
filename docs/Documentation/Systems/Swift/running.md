@@ -12,11 +12,11 @@ Please see the [Modules](./modules.md) page for information about setting up you
 ## Login nodes
 
 ```
-swift.hpc.nrel.gov
-swift-login-1.hpc.nrel.gov
+swift.hpc.nlr.gov
+swift-login-1.hpc.nlr.gov
 ```
 
-`swift.hpc.nrel.gov` is a round-robin alias that will connect you to any available login node.
+`swift.hpc.nlr.gov` is a round-robin alias that will connect you to any available login node.
 
 ## SSH Keys
 
@@ -117,7 +117,7 @@ Usage is tracked on the basis of:
 
 ### AU Calculation Examples
 
-AU calculations are performed automatically between the Slurm scheduler and [Lex](https://hpcprojects.nrel.gov)(NLR's web-based allocation tracking/management software). The following calculations are approximations to help illustrate how your AU will be consumed based on your job resource requests and are approximations only:
+AU calculations are performed automatically between the Slurm scheduler and [Lex](https://hpcprojects.nlr.gov)(NLR's web-based allocation tracking/management software). The following calculations are approximations to help illustrate how your AU will be consumed based on your job resource requests and are approximations only:
 
 A request of 1 GPU, up to 24 CPU cores, and up to 256GB RAM will be charged at 12.5 AU/hr:
 
@@ -278,7 +278,7 @@ export OMP_NUM_THREADS=2
 srun  -n 4 ./fhostone -F
 srun  -n 4 ./phostone -F
 
-MPI Version:Open MPI v4.1.1, package: Open MPI nrmc2l@swift-login-1.swift.hpc.nrel.gov Distribution, ident: 4.1.1, repo rev: v4.1.1, Apr 24, 2021
+MPI Version:Open MPI v4.1.1, package: Open MPI nrmc2l@swift-login-1.swift.hpc.nlr.gov Distribution, ident: 4.1.1, repo rev: v4.1.1, Apr 24, 2021
 task    thread             node name  first task    # on node  core
 0002      0000                 c1-31        0002         0000   018
 0000      0000                 c1-30        0000         0000   072
@@ -292,7 +292,7 @@ task    thread             node name  first task    # on node  core
 0001      0001                 c1-30        0000         0001  0103
 0003      0000                 c1-31        0002         0001  0062
 0003      0001                 c1-31        0002         0001  0103
-MPI VERSION Open MPI v4.1.1, package: Open MPI nrmc2l@swift-login-1.swift.hpc.nrel.gov Distribution, ident: 4.1.1, repo rev: v4.1.1, Apr 24, 2021
+MPI VERSION Open MPI v4.1.1, package: Open MPI nrmc2l@swift-login-1.swift.hpc.nlr.gov Distribution, ident: 4.1.1, repo rev: v4.1.1, Apr 24, 2021
 task    thread             node name  first task    # on node  core
 0000      0000                 c1-30        0000         0000  0072
 0000      0001                 c1-30        0000         0000  0020

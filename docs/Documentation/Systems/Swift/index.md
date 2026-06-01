@@ -18,8 +18,8 @@ Access to Swift requires an NLR HPC account and permission to join an existing a
 
 #### Login Nodes:
 ```
-swift.hpc.nrel.gov
-swift-login-1.hpc.nrel.gov
+swift.hpc.nlr.gov
+swift-login-1.hpc.nlr.gov
 ```
 #### For NLR Employees:
 Swift can be reached from the NLR VPN via ssh to the login nodes as above.

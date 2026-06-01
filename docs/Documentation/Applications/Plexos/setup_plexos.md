@@ -27,7 +27,7 @@ Before we can run PLEXOS, we need to create a license file on the cluster. For t
     echo '<?xml version="1.0"?>
     <XmlRegistryRoot>
       <comms>
-        <licServer_IP val="plexos.hpc.nrel.gov" />
+        <licServer_IP val="plexos.hpc.nlr.gov" />
         <licServer_CommsPort val="8888" />
         <licServer_IP_Secondary />
         <connect>

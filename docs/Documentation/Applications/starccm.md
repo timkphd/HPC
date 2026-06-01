@@ -42,13 +42,15 @@ Then you need to create a Slurm script `<your_scriptfile>` as shown below to sub
     #SBATCH --account=<allocation-id>  # name of project allocation
     
     module load starccm                # load starccm module
+
+	scontrol show hosnames > nodelist
     
     rm -rf /projects/<your_project>/sim_dir/simulation.log   # remove the log file from last run
     # Run Job
     
     echo "------ Running Starccm+ ------"
         
-    starccm+ -np $SLURM_NTASKS -batch /projects/<your_project>/sim_dir/your_simulation.sim >> simulation.log
+    starccm+ -machinefile nodelist -batch /projects/<your_project>/sim_dir/your_simulation.sim >> simulation.log
     
     echo "------ End of the job ------"
     ```
@@ -73,6 +75,8 @@ STAR-CCM+ comes with its own Open MPI and Intel MPI. To use the Intel MPI, the S
     #SBATCH --account=<allocation-id>  # name of project allocation
     
     module load starccm                # load starccm module
+
+	scontrol show hostnames > nodelist
     
     export UCX_TLS=tcp                 # telling IntelMPI to treat the network as ethernet (Kestrel Slingshot can be thought of as ethernet) 
                                        # by using the tcp protocol
@@ -82,7 +86,7 @@ STAR-CCM+ comes with its own Open MPI and Intel MPI. To use the Intel MPI, the S
     
     echo "------ Running Starccm+ ------"
         
-    starccm+ -mpi intel -np $SLURM_NTASKS -batch /projects/<your_project>/sim_dir/your_simulation.sim >> simulation.log
+    starccm+ -mpi intel -machinefile nodelist -batch /projects/<your_project>/sim_dir/your_simulation.sim >> simulation.log
     
     echo "------ End of the job ------"
     ```
@@ -107,13 +111,15 @@ STAR-CCM+ does not come with its own Cray MPI, but it can run using the one inst
     #SBATCH --account=<allocation-id>  # name of project allocation
     
     module load starccm/20.02.007_crayex                # load starccm module
+
+	scontrol show hostnames > nodelist
     
     rm -rf /projects/<your_project>/sim_dir/simulation.log   # remove the log file from last run
     # Run Job
     
     echo "------ Running Starccm+ ------"
         
-    starccm+ -mpi crayex -np $SLURM_NTASKS -batch /projects/<your_project>/sim_dir/your_simulation.sim >> simulation.log
+    starccm+ -mpi crayex -machinefile nodelist -batch /projects/<your_project>/sim_dir/your_simulation.sim >> simulation.log
     
     echo "------ End of the job ------"
     ```

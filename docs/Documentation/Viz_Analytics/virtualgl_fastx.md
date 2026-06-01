@@ -8,7 +8,7 @@ In addition to standard ssh-only login nodes, Kestrel is also equipped with seve
 !!! Note About Usage
     DAV FastX nodes are a limited resource and not intended as a general-purpose remote desktop. We ask that you please restrict your usage to only HPC allocation-related work and/or visualization software that requires an HPC system.
 
-There are seven internal DAV nodes on Kestrel available only to NLR users on the NLR VPN, on campus, or via the [HPC VPN](https://www.nlr.gov/hpc/vpn-connection.html) that are accessible via round-robin at **kestrel-dav.hpc.nrel.gov**. The individual nodes are named kd1 through kd7.hpc.nrel.gov.
+There are seven internal DAV nodes on Kestrel available only to NLR users on the NLR VPN, on campus, or via the [HPC VPN](https://www.nlr.gov/hpc/vpn-connection.html) that are accessible via round-robin at **kestrel-dav.hpc.nlr.gov**. The individual nodes are named kd1 through kd7.hpc.nlr.gov.
 
 There is also one node that is ONLY accessible by external (non-NLR) users available at **kestrel-dav.nlr.gov**. This address will connect to the node kd8, and requires both password and OTP for login. 
 
@@ -32,7 +32,7 @@ NLR users may use the web browser or the FastX desktop client. External users mu
 ??? abstract "NLR On-Site and VPN Users" 
     ### Using a Web Browser
 
-    Launch a web browser on your local machine and connect to [https://kestrel-dav.hpc.nrel.gov](https://kestrel-dav.hpc.nrel.gov). After logging in with your HPC username/password you will be able to launch a FastX session by choosing a desktop environment of your choice. Either [GNOME](https://www.gnome.org/) or [XFCE](https://www.xfce.org/) are available for use.
+    Launch a web browser on your local machine and connect to [https://kestrel-dav.hpc.nlr.gov](https://kestrel-dav.hpc.nlr.gov). After logging in with your HPC username/password you will be able to launch a FastX session by choosing a desktop environment of your choice. Either [GNOME](https://www.gnome.org/) or [XFCE](https://www.xfce.org/) are available for use.
 
 
     ### Using the Desktop Client 
@@ -54,7 +54,7 @@ NLR users may use the web browser or the FastX desktop client. External users mu
 
     Give your profile a name and enter the settings...
 
-    Address/URL: *kestrel-dav.hpc.nrel.gov*
+    Address/URL: *kestrel-dav.hpc.nlr.gov*
 
     OR you may use the address of an individual kd or ed node if you would like to resume a previous session.
 
@@ -179,26 +179,52 @@ nodes that you are not using, or your sessions may be terminated by system admin
 active users. 
 
 ## Reattaching FastX Sessions
-Connections to the DAV nodes via kestrel-dav.hpc.nrel.gov will connect you to a random node. To resume a session that you have suspended, take note of the node your session is running on (kd1, kd2, kd3, kd4, kd5, kd6, or kd7) before you close the FastX client or browser window, and you may directly access that node when you are ready to reconnect at e.g. `kd#.hpc.nrel.gov` in the FastX client or through your web browser at `https://kd#.hpc.nrel.gov`. 
+Connections to the DAV nodes via kestrel-dav.hpc.nlr.gov will connect you to a random node. To resume a session that you have suspended, take note of the node your session is running on (kd1, kd2, kd3, kd4, kd5, kd6, or kd7) before you close the FastX client or browser window, and you may directly access that node when you are ready to reconnect at e.g. `kd#.hpc.nlr.gov` in the FastX client or through your web browser at `https://kd#.hpc.nlr.gov`. 
 
 ## Compute Intensive GUI Applications
 
-Compute intensive applicatons can be used through a FastX session if GUI assisted operation is unavoidable. For such use cases and resource intensive operations, please run them on a dedicated compute node and interact with them through a FastX session. The steps are as follows:
+Compute intensive applications can be used through a remote session if GUI-assisted operation is unavoidable. For such use cases, run the application on a dedicated compute node and interact with it via X forwarding. The process differs slightly between Kestrel and Gila.
 
-1. Open a terminal in a FastX session and ask for an [allocation](../Slurm/interactive_jobs.md). For example,
+### Kestrel
+
+On Kestrel, open a terminal inside a **FastX session** on a DAV node and follow these steps:
+
+1. Ask for an [allocation](../Slurm/interactive_jobs.md) from within the FastX terminal. For example,
 ```
 $ salloc -A <projectname> -t 02:00:00 --nodes=1 --ntasks-per-node=20 --mem=60G --gres=gpu:1
 ```
 2. Wait until you obtain an allocation. The terminal will display `<username>@<nodename>` when successful.
-3. Open a new terminal tab. In the new terminal tab, execute the following to connect to the node you have been allocated.
+3. Open a new terminal tab and connect to the allocated node with X forwarding:
 ```
 $ ssh -X <nodename>
 ```
-4. You are now on a compute node with [X forwarding](https://en.wikipedia.org/wiki/X_Window_System) to a FastX desktop session, ready to run GUI applications. Your GUI enabled applications can now utilize 20 cores and 1 GPU for 2 hours, as requested in the `salloc` command above. For example, to run Chemkin Reaction Workbench, execute the following in this new terminal tab:
+4. You are now on a compute node with [X forwarding](https://en.wikipedia.org/wiki/X_Window_System) to your FastX desktop session, ready to run GUI applications. Your GUI-enabled applications can now utilize 20 cores and 1 GPU for 2 hours, as requested in the `salloc` command above. For example, to run Chemkin Reaction Workbench:
 ```
 $ module load ansys
 $ run_rdworkbench.sh
 ```
+
+### Gila
+
+On Gila, there are no DAV nodes. Instead, you can connect to the Gila login node with X forwarding from a Kestrel DAV node, then request an allocation with the `--x11` flag so that X forwarding is propagated through to the compute node automatically.
+
+1. Connect to Gila with X forwarding:
+```
+$ ssh -X gila
+```
+2. Request an allocation with `--x11` to enable X forwarding on the compute node:
+```
+$ salloc -A <projectname> -t 01:00:00 --nodes=1 --ntasks-per-node=5 --mem=100G --gres=gpu:1 --partition=gpu-intel-a100-80g --x11
+```
+3. Once the allocation is granted, the terminal will drop you directly onto the compute node with X forwarding active. You can now launch GUI applications, e.g. M-Star:
+```
+$ module load application
+$ module load mstar/4.1.15
+$ mstar
+```
+
+!!! note
+    The `--x11` flag in `salloc` is the key difference from Kestrel. It tells Slurm to carry X forwarding through to the compute node, so a separate `ssh -X <nodename>` step is not needed.
 
 ## Troubleshooting
 

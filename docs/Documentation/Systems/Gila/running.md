@@ -21,23 +21,24 @@ There are four types of GPU nodes on Gila, including the Grace Hopper nodes desc
 
 ### Grace Hopper Nodes
 
-Gila has 5 NVIDIA Grace Hopper nodes. To use the Grace Hopper nodes, submit your jobs to the `gh` partition from the `gila-arm.hpc.nrel.gov` login node. Each Grace Hopper node has a 72 core NVIDIA Grace CPU and an NVIDIA GH200 GPU, with 96GB of VRAM and 470GB of RAM. They have one socket and NUMA node. 
+Gila has 5 NVIDIA Grace Hopper nodes. To use the Grace Hopper nodes, submit your jobs to the `gh` partition from the `gila-arm.hpc.nlr.gov` login node. Each Grace Hopper node has a 72 core NVIDIA Grace CPU and an NVIDIA GH200 GPU, with 96GB of VRAM and 470GB of RAM. They have one socket and NUMA node. 
 
-Please note - the __NVIDIA Grace CPUs__ run on a different processing architecture (ARM64) than both the __Intel Xeon Icelake CPUs__ (x86-64) and the __AMD EPYC Milan__ (x86-64). Any application that is manually compiled by a user and intended to be used on the Grace Hopper nodes __MUST__ be compiled on the Grace Hopper nodes themselves. 
+Please note - the __NVIDIA Grace CPUs__ run on a different processing architecture (ARM64) than both the __Intel Xeon Icelake CPUs__ (x86-64) and the __AMD EPYC Milan__ (x86-64). Any application that is manually compiled by a user and intended to be used on the Grace Hopper nodes __MUST__ be compiled on the Grace Hopper nodes themselves.
 
 
 
 ## Partitions
 
-Here are the partitions as of 2/4/2026:
+Here are the partitions as of 4/2/2026:
 
 | Partition Name       | CPU                       | GPU                      | Qty | RAM    | Cores/node | GPUs/node |
 | :--:                 | :--:                      | :--:                     | :--:| :--:   | :--:       | :--:      |
-| gpu-intel-a100-40g   | Intel Xeon Icelake        | NVIDIA Tesla A100-40     | 7   | 210 GB | 60         | 1         |
+| gpu-intel-a100-40g   | Intel Xeon Icelake        | NVIDIA Tesla A100-40     | 5   | 210 GB | 60         | 1         |
 | gpu-intel-a100-80g   | Intel Xeon Icelake        | NVIDIA Tesla A100-80     | 5   | 910 GB | 42         | 8         |
 | amd                  | 2x 30 Core AMD Epyc Milan | N/A                      | 36  | 220 GB | 60         | N/A       |
 | gh                   | NVIDIA Grace              | GH200                    | 5   | 470 GB | 72         | 1         |
-| gpu-amd-mi210        | 2x 30 Core AMD Epyc Milan | AMD MI210                | 1   | 210 GB | 60         | 1         |
+| gpu-amd-mi210        | 2x 30 Core AMD Epyc Milan | AMD MI210                | 2   | 210 GB | 60         | 1         |
+| gpu-amd-mi250        | 2x 30 Core AMD Epyc Milan | AMD MI250                | 1   | 1   TB | 48         | 1         |
 
 
 ## Performance Recommendations
