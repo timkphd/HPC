@@ -56,7 +56,7 @@ $ curl -O https://URL
 $ wget https://URL
 ```
 
-Additional rsync examples are available [here](https://github.com/NREL/HPC/tree/master/general/data-transfer).
+Additional rsync examples are available [here](https://github.com/NatLabRockies/HPC/tree/master/general/data-transfer).
 
 #### Large Transfers (>100GB) outside of the NLR network
 
