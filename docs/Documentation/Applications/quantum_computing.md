@@ -37,7 +37,7 @@ module help qiskit/aer-gpu
 ## Qiskit Aer GPU Simulation
 
 `qiskit-aer-gpu` replaces the CPU `AerSimulator` with a GPU-accelerated backend.
-See [`qae_example_backends.ipynb`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/qae_example_backends.ipynb)
+See [`qae_example_backends.ipynb`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/qae_example_backends.ipynb)
 for a worked example comparing CPU and GPU backends for a QAE circuit.
 
 The simplest way to enable GPU simulation is:
@@ -77,8 +77,8 @@ run on CPUs, GPUs, or QPU hardware.
 
 ### Single GPU
 
-See [`binary_optimizer.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/binary_optimizer.py)
-and [`qae.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/qae.py)
+See [`binary_optimizer.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/binary_optimizer.py)
+and [`qae.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/qae.py)
 for real-world examples using the single-GPU target.
 
 ```python
@@ -100,7 +100,7 @@ print(result)   # { 00:~500  11:~500 }
 ### Noisy Simulation
 
 CUDA-Q supports trajectory-based noisy simulation using a depolarizing noise model.
-See [`binary_optimizer.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/binary_optimizer.py)
+See [`binary_optimizer.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/binary_optimizer.py)
 for a production example with per-gate noise channels applied to a QAE circuit.
 
 ```python
@@ -124,7 +124,7 @@ result = cudaq.sample(bell, shots_count=1000, noise_model=noise)
 The `mqpu` option assigns shots to multiple GPUs in parallel. Each GPU holds its own
 copy of the full statevector and executes an independent subset of shots — useful
 for shot-noisy sweeps where the circuit fits in a single GPU's memory.
-See [`par_benchmark_2gpu.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/par_benchmark_2gpu.py)
+See [`par_benchmark_2gpu.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/par_benchmark_2gpu.py)
 for a DQA benchmark using this strategy on Kestrel H100s.
 
 ```python
@@ -166,7 +166,7 @@ srun python3 my_mqpu_script.py
 
     For noisy circuits that fit in one GPU (≤28 qubits), **`mpi4py` shot-splitting
     typically outperforms `mqpu`** due to lower inter-process overhead.
-    See the [parallelization report](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/parallelisation_report.md)
+    See the [parallelization report](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/parallelisation_report.md)
     for benchmarks on Kestrel H100s.
 
 ### Multi-GPU Statevector (mgpu)
@@ -183,11 +183,11 @@ GPUs using cuStateVec, enabling simulation of circuits that exceed single-GPU me
 On Kestrel, multi-GPU requires GPU-aware MPI via the Cray GTL library. Use the
 wrapper script below to set the required environment variables **before** Python
 starts — they cannot be set with `os.environ` inside the script.
-See [`bench_mgpu_dqa.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/bench_mgpu_dqa.py)
-and [`par_benchmark_mgpu.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/par_benchmark_mgpu.py)
+See [`bench_mgpu_dqa.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/bench_mgpu_dqa.py)
+and [`par_benchmark_mgpu.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/par_benchmark_mgpu.py)
 for full DQA benchmarking examples.
 
-**[`run_mgpu.sh`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/run_mgpu.sh):**
+**[`run_mgpu.sh`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/run_mgpu.sh):**
 ```bash
 #!/bin/bash
 export MPICH_GPU_SUPPORT_ENABLED=1
@@ -198,7 +198,7 @@ export CUDAQ_MGPU_COMM_PLUGIN_TYPE=MPICH
 exec python3 "$@"
 ```
 
-**[Script using mgpu](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/test_mgpu.py):**
+**[Script using mgpu](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/test_mgpu.py):**
 ```python
 import cudaq
 cudaq.set_target('nvidia', option='mgpu,fp32')
@@ -287,7 +287,7 @@ srun bash run_mgpu.sh my_cudaq_mgpu_script.py
 
 For noisy trajectory simulation with many shots, splitting shots across MPI ranks
 (one rank per GPU) gives near-linear speedup. See
-[`par_benchmark_mpi.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/par_benchmark_mpi.py)
+[`par_benchmark_mpi.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/par_benchmark_mpi.py)
 for a full working example.
 
 ```bash
@@ -334,7 +334,7 @@ See the [Jupyter documentation](../Development/Jupyter/index.md) for instruction
 forwarding the port to your local browser.
 
 A worked example notebook for QAE-based amplitude estimation is available at
-[`qae_example.ipynb`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/qae_example.ipynb).
+[`qae_example.ipynb`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/qae_example.ipynb).
 
 ---
 
@@ -383,14 +383,14 @@ python3 your_script.py
 
 **NLR example code (Kestrel-tested):**
 
-- [`run_mgpu.sh`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/run_mgpu.sh) — Cray GTL wrapper for mgpu
-- [`test_mgpu.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/test_mgpu.py) — GHZ circuit on nvidia mgpu target
-- [`bench_mgpu_dqa.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/bench_mgpu_dqa.py) — DQA benchmark: noiseless + noisy mgpu timing
-- [`par_benchmark_mgpu.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/par_benchmark_mgpu.py) — scaling benchmark across multiple GPUs with mgpu
-- [`par_benchmark_mpi.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/par_benchmark_mpi.py) — DQA benchmark: mpi4py shot-splitting across ranks
-- [`par_benchmark_2gpu.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/par_benchmark_2gpu.py) — DQA benchmark: mqpu 2-GPU shot-parallel
-- [`parallelisation_report.md`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/parallelisation_report.md) — Full benchmark comparison (mqpu / mpi4py / mgpu) on Kestrel H100s
-- [`qae_example_backends.ipynb`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/qae_example_backends.ipynb) — Qiskit Aer GPU vs CPU backend comparison notebook
-- [`binary_optimizer.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/binary_optimizer.py) — CUDA-Q QAE-based stochastic optimiser
-- [`qae.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/qae.py) — Quantum Amplitude Estimation circuits
-- [`resource_estimator.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/fix/cuda-q-script/qiskit_impl/resource_estimator.py) — Gate/qubit resource estimation utilities
+- [`run_mgpu.sh`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/run_mgpu.sh) — Cray GTL wrapper for mgpu
+- [`test_mgpu.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/test_mgpu.py) — GHZ circuit on nvidia mgpu target
+- [`bench_mgpu_dqa.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/bench_mgpu_dqa.py) — DQA benchmark: noiseless + noisy mgpu timing
+- [`par_benchmark_mgpu.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/par_benchmark_mgpu.py) — scaling benchmark across multiple GPUs with mgpu
+- [`par_benchmark_mpi.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/par_benchmark_mpi.py) — DQA benchmark: mpi4py shot-splitting across ranks
+- [`par_benchmark_2gpu.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/par_benchmark_2gpu.py) — DQA benchmark: mqpu 2-GPU shot-parallel
+- [`parallelisation_report.md`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/parallelisation_report.md) — Full benchmark comparison (mqpu / mpi4py / mgpu) on Kestrel H100s
+- [`qae_example_backends.ipynb`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/qae_example_backends.ipynb) — Qiskit Aer GPU vs CPU backend comparison notebook
+- [`binary_optimizer.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/binary_optimizer.py) — CUDA-Q QAE-based stochastic optimiser
+- [`qae.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/qae.py) — Quantum Amplitude Estimation circuits
+- [`resource_estimator.py`](https://github.com/NatLabRockies/quantum_stochastic_programming/blob/main/qiskit_impl/resource_estimator.py) — Gate/qubit resource estimation utilities
