@@ -128,8 +128,8 @@ Once the environment has been installed, it can be tested with the following ste
 
 ??? example "Testing the pre-built PyTorch MPI NCCL environment"
 	```
-       $ wget https://raw.githubusercontent.com/NREL/HPC/gh-pages/docs/Documentation/Machine_Learning/metadata/testPytorchMPI.py
-       $ wget https://raw.githubusercontent.com/NREL/HPC/gh-pages/docs/Documentation/Machine_Learning/metadata/testNCCL.py
+       $ wget https://raw.githubusercontent.com/NatLabRockies/HPC/gh-pages/docs/Documentation/Machine_Learning/metadata/testPytorchMPI.py
+       $ wget https://raw.githubusercontent.com/NatLabRockies/HPC/gh-pages/docs/Documentation/Machine_Learning/metadata/testNCCL.py
        $ salloc -A <projectname> -t 00:15:00 --nodes=2 --ntasks-per-node=1 --gres=gpu:1
        $ source my_torch_MPI_NCCL/bin/activate
        $ srun -n 2 python testPytorchMPI.py
