@@ -97,7 +97,7 @@ We will run the same example by submitting the job to the SLURM queue. This exam
 
     # Clone the HPC master branch in your scratch folder
     cd /scratch/${USER}/
-    git git@github.com:NatLabRockies/HPC.git
+    git clone git@github.com:NatLabRockies/HPC.git
 
     # Go to the appropriate folder and submit the job on the HPC
     cd HPC/applications/plexos/RunFiles
