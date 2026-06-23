@@ -32,7 +32,10 @@ $ rsync -aP --no-g /scratch/username/dataset1/ /mss/users/username/dataset1/
 
 #### The Data Management Node (Kestrel only)
 
-[Kestrel](../../Systems/Kestrel/index.md) users are encouraged to transfer data outside of the NLR network through the dedicated data transfer node, `dm1`, whenever possible. `dm1` functions like a login node and can be directly logged into via `ssh <username>@dm1.hpc.nlr.gov`. The `dm1` node is able to access every filesystem on Kestrel and can be used to initiate large data transfers through any of the methods discussed below without impacting the experience of other users on the cluster.
+[Kestrel](../../Systems/Kestrel/index.md) users are encouraged to transfer data outside of the NLR network through the dedicated data transfer node, `dm1`, whenever possible. The `dm1` node is able to access every filesystem on Kestrel and can be used to initiate large data transfers through any of the methods discussed below without impacting the experience of other users on the cluster.
+
+!!! Note "Accessing the Data Management Node"
+    The `dm1` node functions like a login node; users who are connected to the internal NLR network may directly login to it from an external location (e.g., from a laptop) via `ssh <username>@dm1.hpc.nlr.gov`, or from another Kestrel node via `ssh dm1`. Any users who are not connected to the internal NLR network will have to first connect to the HPC VPN. Refer to [Accessing Kestrel](../../Systems/Kestrel/index.md#accessing-kestrel) for more information.
 
 #### Small Transfers (<100GB) outside of the NLR network
 
