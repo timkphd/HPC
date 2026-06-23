@@ -10,7 +10,7 @@ Welcome to the first NLR HPC tutorial for Reinforcement Learning (RL)!
 
 This tutorial covers an extended, albeit simplified, introduction of OpenAI Gym and Ray/RLlib which you can use to effortlessly design, create, and run your own RL experiments on Eagle. 
 
-You can find the full material of this tutorial in the [NLR/HPC GitHub repo](https://github.com/NatLabRockies/HPC/tree/master/languages/python/openai_rllib).
+You can find the full material of this tutorial in the [NatLabRockies/HPC GitHub repo](https://github.com/NatLabRockies/HPC/tree/master/languages/python/openai_rllib).
 
 The tutorial covers the following:
 
