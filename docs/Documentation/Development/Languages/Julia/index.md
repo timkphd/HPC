@@ -40,7 +40,7 @@ This section contains demos (in the form of scripts and notebooks) and how-to gu
 
 ## Demo Scripts and Notebooks
 
-The following scripts and notebooks are available on the [`master` branch of NLR/HPC](https://github.com/NatLabRockies/HPC) to download and run,
+The following scripts and notebooks are available on the [`master` branch of NatLabRockies/HPC](https://github.com/NatLabRockies/HPC) to download and run,
 
 * [Julia Tour](https://github.com/NatLabRockies/HPC/blob/master/languages/julia/julia-tutorial/source-notebooks/Julia-Tuor.ipynb)
 * [Julia Parallel Computing](https://github.com/NatLabRockies/HPC/blob/master/languages/julia/julia-tutorial/source-notebooks/Julia-Parallel-Computing.ipynb)
