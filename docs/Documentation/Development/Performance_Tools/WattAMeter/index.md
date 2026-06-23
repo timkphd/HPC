@@ -4,7 +4,7 @@
 
 [WattAMeter API documentation](https://natlabrockies.github.io/WattAMeter)
 
-WattAMeter is a Python library developed for tracking and analyzing time series of power system data. It provides trackers for collecting power per node, per job, enabling users to analyze power consumption patterns and optimize energy usage in high-performance computing environments. It is designed to be easy to integrate into existing workflows, making it a valuable tool for researchers and engineers focused on energy efficiency in computing. There are multiple ways to use WattAMeter. Check out the complete documentation [here](https://github.com/NREL/WattAMeter).
+WattAMeter is a Python library developed for tracking and analyzing time series of power system data. It provides trackers for collecting power per node, per job, enabling users to analyze power consumption patterns and optimize energy usage in high-performance computing environments. It is designed to be easy to integrate into existing workflows, making it a valuable tool for researchers and engineers focused on energy efficiency in computing. There are multiple ways to use WattAMeter. Check out the complete documentation [here](https://github.com/NatLabRockies/WattAMeter).
 
 ## WattAMeter as a module
 

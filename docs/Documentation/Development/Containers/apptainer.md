@@ -3,7 +3,7 @@
     
 ## How to use Apptainer
 
-On NLR HPC systems, Apptainer is accessed via a module named `apptainer` (you can check the current default module via `ml -d av apptainer`). On Kestrel specifically, the directory `/nopt/nrel/apps/software/apptainer/1.1.9/examples` holds a number of images (`*.sif`) and an example script (`script`) that shows how to run containers hosting MPI programs across multiple nodes. The `script` can also be accessed from [our GitHub repository](https://github.com/NREL/HPC/blob/master/kestrel/apptainer/script).
+On NLR HPC systems, Apptainer is accessed via a module named `apptainer` (you can check the current default module via `ml -d av apptainer`). On Kestrel specifically, the directory `/nopt/nrel/apps/software/apptainer/1.1.9/examples` holds a number of images (`*.sif`) and an example script (`script`) that shows how to run containers hosting MPI programs across multiple nodes. The `script` can also be accessed from [our GitHub repository](https://github.com/NatLabRockies/HPC/blob/master/kestrel/apptainer/script).
 
 Before we get to the more complicated example from `script`, we'll first look at downloading (or *pulling*) and working with a simple image. The following examples assume you are logged into Kestrel, but the concepts demonstrated are still valid for any host system on which you wish to execute a container.
 
@@ -89,7 +89,7 @@ As mentioned above, there is a script in the apptainer directory that shows how 
 
 "ch*" can be thought as a "lower level" communications protocol. A MPICH container might be built with either but we have found that ch4 is considerably faster on Kestrel. 
 
-The script can be found at `/nopt/nrel/apps/software/apptainer/1.1.9/examples/script`, as well as [our GitHub repository](https://github.com/NREL/HPC/blob/master/kestrel/apptainer/script).
+The script can be found at `/nopt/nrel/apps/software/apptainer/1.1.9/examples/script`, as well as [our GitHub repository](https://github.com/NatLabRockies/HPC/blob/master/kestrel/apptainer/script).
 
 Here is a copy:
 
@@ -176,7 +176,7 @@ You can see example output from this script in the directory:
 /nopt/nrel/apps/software/apptainer/1.1.9/examples/output/
 ```
 
-Within `/nopt/nrel/apps/software/apptainer/1.1.9/examples`, the subdirectory `defs` contains the recipes for the images in `examples`. The images `apptainer.sif` and `intel.sif` were built in two steps using `app_base.def` - apptainer.def and mods_intel.def - intel.def. They can also be found in the [HPC code examples repository](https://github.com/NREL/HPC/tree/master/kestrel/apptainer/defs).
+Within `/nopt/nrel/apps/software/apptainer/1.1.9/examples`, the subdirectory `defs` contains the recipes for the images in `examples`. The images `apptainer.sif` and `intel.sif` were built in two steps using `app_base.def` - apptainer.def and mods_intel.def - intel.def. They can also be found in the [HPC code examples repository](https://github.com/NatLabRockies/HPC/tree/master/kestrel/apptainer/defs).
 
 The script `sif2def` can be used to generate a `.def` recipe from a `.sif` image. It has not been extensively tested, so it may not work for all images and is provided here "as is."
 

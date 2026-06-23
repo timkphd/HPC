@@ -327,7 +327,7 @@ packages
 
 ### Kestrel specific configuration
 
-In order to add HPE's and NREL's installed compilers to Kestrel, we can edit the `compilers.yaml` file as discussed earlier. 
+In order to add HPE's and NLR's installed compilers to Kestrel, we can edit the `compilers.yaml` file as discussed earlier. 
 Similarly, we can add the HPE provided MPIs (Cray-MPICH) and specify variances for packages to be installed by editing the `packages.yaml`.
 Finally, if spack will be used for the creation of modulefiles, we can edit `module.yaml` to produce `tcl` or `LUA` modulefiles with the format and naming sought.
 

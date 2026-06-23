@@ -192,12 +192,12 @@ The [pyeagle](https://github.nrel.gov/MBAP/pyeagle) package is available for int
 
 There are scripts written for launching a Jupyter session inside of a slurm job.
 
-Full directions and scripts included in the [Jupyter repo](https://github.com/NREL/HPC/tree/master/general/Jupyterhub/jupyter).
+Full directions and scripts included in the [Jupyter repo](https://github.com/NatLabRockies/HPC/tree/master/general/Jupyterhub/jupyter).
 
 ??? Example "Standard Jupyter session launch with full CPU request"
-    Download [sbatch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/sbatch_jupyter.sh) and [auto_launch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh)
+    Download [sbatch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/sbatch_jupyter.sh) and [auto_launch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh)
 
-    Edit [sbatch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/sbatch_jupyter.sh) to change:
+    Edit [sbatch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/sbatch_jupyter.sh) to change:
     ```
     --time=<time_request>
     --account=<project_handle>
@@ -206,17 +206,17 @@ Full directions and scripts included in the [Jupyter repo](https://github.com/NR
     source activate /home/$USER/.conda-envs/<MY_ENVIRONMENT> # Replace <MY_ENVIRONMENT> with the name of your conda environment
     ```
 
-    Edit [auto_launch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh) to include your sbatch_jupyter script:
+    Edit [auto_launch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh) to include your sbatch_jupyter script:
     ```
     RES=$(sbatch sbatch_jupyter.sh)
     ```
 
-    Run [auto_launch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh) and follow the directions that come up on your terminal window.
+    Run [auto_launch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh) and follow the directions that come up on your terminal window.
 
 ??? Example "Standard Jupyter session launch in the shared partition with partial CPU request"
-    Download [shared_sbatch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/shared_sbatch_jupyter.sh) and [auto_launch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh)
+    Download [shared_sbatch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/shared_sbatch_jupyter.sh) and [auto_launch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh)
 
-    Edit [shared_sbatch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/shared_sbatch_jupyter.sh) to change:
+    Edit [shared_sbatch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/shared_sbatch_jupyter.sh) to change:
     ```
     --time=<time_request>
     --account=<project_handle>
@@ -228,17 +228,17 @@ Full directions and scripts included in the [Jupyter repo](https://github.com/NR
     source activate /home/$USER/.conda-envs/<MY_ENVIRONMENT>  # Replace <MY_ENVIRONMENT> with the name of your conda environment
     ```
 
-    Edit [auto_launch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh) to include your sbatch_jupyter script:
+    Edit [auto_launch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh) to include your sbatch_jupyter script:
     ```
     RES=$(sbatch shared_sbatch_jupyter.sh)
     ```
 
-    Run [auto_launch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh) and follow the directions that come up on your terminal window.
+    Run [auto_launch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh) and follow the directions that come up on your terminal window.
 
 ??? Example "Standard Jupyter session launch with GPU request"
-    Download [gpu_sbatch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/gpu_sbatch_jupyter.sh) and [auto_launch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh)
+    Download [gpu_sbatch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/gpu_sbatch_jupyter.sh) and [auto_launch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh)
 
-    Edit [gpu_sbatch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/gpu_sbatch_jupyter.sh) to change:
+    Edit [gpu_sbatch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/gpu_sbatch_jupyter.sh) to change:
     ```
     --time=<time_request>
     --account=<project_handle>
@@ -255,12 +255,12 @@ Full directions and scripts included in the [Jupyter repo](https://github.com/NR
     source activate /home/$USER/.conda-envs/<MY_ENVIRONMENT>  # Replace <MY_ENVIRONMENT> with the name of your conda environment
     ```
 
-    Edit [auto_launch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh) to include your sbatch_jupyter script:
+    Edit [auto_launch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh) to include your sbatch_jupyter script:
     ```
     RES=$(sbatch gpu_sbatch_jupyter.sh)
     ```
 
-    Run [auto_launch_jupyter.sh](https://github.com/NREL/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh) and follow the directions that come up on your terminal window.
+    Run [auto_launch_jupyter.sh](https://github.com/NatLabRockies/HPC/blob/master/general/Jupyterhub/jupyter/auto_launch_jupyter.sh) and follow the directions that come up on your terminal window.
 
 
 ## Reasons to Not Run Jupyter Directly on a Login Node

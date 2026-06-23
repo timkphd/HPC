@@ -89,7 +89,7 @@ You may use these environment variables in your sbatch scripts to help control o
 
 ## Example SBATCH Script Walkthrough
 
-Many examples of sbatch scripts are available in the [HPC Repository Slurm Directory](https://github.com/NREL/HPC/tree/master/slurm) on Github.
+Many examples of sbatch scripts are available in the [HPC Repository Slurm Directory](https://github.com/NatLabRockies/HPC/tree/master/slurm) on Github.
 
 Here's a basic template job script to get started, followed by a breakdown of the individual components of the script. This script may be adapted to any HPC system with minor modifications. Copy it into a file on the cluster, make any necessary changes, and save it as a file, e.g. "myjob.sh". 
 
@@ -160,5 +160,5 @@ You may also use more advanced bash scripting as a part of your sbatch script, e
 
 More system-specific information about Slurm partitions, node counts, memory limits, and other details can be found under the appropriate [Systems](../Systems/index.md) page.
 
-You may also visit the "master" main branch of the [Github repository](https://www.github.com/NREL/HPC) for downloadable examples, or to contribute your own.
+You may also visit the "master" main branch of the [Github repository](https://github.com/NatLabRockies/HPC) for downloadable examples, or to contribute your own.
 

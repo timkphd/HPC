@@ -288,6 +288,6 @@ To be sure, there are many more considerations to have when developing a highly 
 ## Extra resources
 
 * ["Preparing your Python code for Perlmutter's GPUs"](https://docs.nersc.gov/development/languages/python/perlmutter-prep/) (NERSC)
-* [Another `numba` example](https://github.com/NREL/HPC/blob/master/languages/python/numba/numba_demo.ipynb) (NLR)
+* [Another `numba` example](https://github.com/NatLabRockies/HPC/blob/master/languages/python/numba/numba_demo.ipynb) (NLR)
 * ["Just-in-time (JIT) compilation"](https://docs.nvidia.com/cuda/cutensor/latest/just_in_time_compilation.html) (NVIDIA)
 * [Numba documentation](https://numba.readthedocs.io/en/stable/) (Numba)
