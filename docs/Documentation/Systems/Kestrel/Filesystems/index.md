@@ -90,7 +90,7 @@ The National Solar Radiation Database (NSRDB) is a serially complete collection 
 
 The Wind Integration National Data Set (WIND) Toolkit consists of wind resource data for North America and was produced using the Weather Research and Forecasting Model (WRF).
 
-For more information on the data sets hosted on Kestrel, please see the [Github repository](https://github.com/NREL/HPC/tree/master/general/datasets).
+For more information on the data sets hosted on Kestrel, please see the [Github repository](https://github.com/NatLabRockies/HPC/tree/master/general/datasets).
 
 ### ScratchFS
 
