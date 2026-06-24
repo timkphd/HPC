@@ -15,7 +15,7 @@ For further information about invidiual systems' filesystem architecture and quo
 
 ## Best Practices for Transferring Files
 
-#### File Transfers Between Filesystems on the NLR network
+### File Transfers Between Filesystems on the NLR network
 
 rsync is the recommended tool for transferring data between NLR systems. It allows you to easily restart transfers if they fail, and also provides more consistency when dealing with symbolic links, hard links, and sparse files than either scp or cp. It is recommended you do not use compression for transfers within NLR systems. An example command is:
 
@@ -23,12 +23,23 @@ rsync is the recommended tool for transferring data between NLR systems. It allo
 $ rsync -aP --no-g /scratch/username/dataset1/ /mss/users/username/dataset1/
 ```
 
-*Mass Storage has quotas that limit the number of individual files you can store. If you are copying hundreds of thousands of files then it is best to archive these files prior to copying to Mass Storage. See the [guide on how to archive files](#archiving-files-and-directories).*
+### Transfers to an External Network
 
-*Mass Storage quotas rely on the group of the file and not the directory path. It is best to use the `--no-g` option when rsyncing to MSS so you use the destination group rather than the group permissions of your source.  You can also `chgrp` your files to the appropriate group prior to rsyncing to MSS.*
+!!! Note
+    The [Mass Storage System (MSS)](../mss.md) has quotas that limit the number of individual files you can store. If you are copying hundreds of thousands of files then it is best to archive these files prior to copying to Mass Storage. See the [guide on how to archive files](#archiving-files-and-directories).
+    
+    Mass Storage quotas rely on the group of the file and not the directory path. It is best to use the `--no-g` option when rsyncing to MSS so you use the destination group rather than the group permissions of your source.  You can also `chgrp` your files to the appropriate group prior to rsyncing to MSS.
+
+#### The Data Management Node (Kestrel only)
+
+[Kestrel](../../Systems/Kestrel/index.md) users are encouraged to transfer data outside of the NLR network through the dedicated data transfer node, `dm1`, whenever possible. The `dm1` node is able to access every filesystem on Kestrel and can be used to initiate large data transfers through any of the methods discussed below without impacting the experience of other users on the cluster.
+
+!!! Note "Accessing the Data Management Node"
+    The `dm1` node functions like a login node; users who are on the NLR network may connect via `ssh <username>@dm1.hpc.nlr.gov`. External users can connect via `ssh dm1` from `kestrel.nlr.gov` or use the SSH gateway or HPC VPN. Refer to [Accessing Kestrel](../../Systems/Kestrel/index.md#accessing-kestrel) for more information.
 
 #### Small Transfers (<100GB) outside of the NLR network
-`rsync`, `scp`, and `curl` will be your best option for small transfers (<100GB) outside of the NLR network. If your rsync/scp/curl transfers are taking hours to complete then you should consider using [Globus](globus.md).
+
+`rsync`, `scp`, and `curl` will be your best option for small transfers (<100GB) outside of the NLR network. If your rsync/scp/curl transfers are taking hours to complete then you should consider using [Globus](globus.md), if possible.
 
 If you're transferring many files then you should use rsync:
 
