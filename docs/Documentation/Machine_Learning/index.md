@@ -255,7 +255,6 @@ Find below a simple neural network example using the MNIST data set for getting 
 ??? example "MNIST example"
     ```
 
-    # Select a standard data set and normalize
 	import tensorflow as tf
 
 	# Select a standard data set and normalize
