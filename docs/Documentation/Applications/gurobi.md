@@ -8,7 +8,7 @@
     
     ```
     WARNING: SLURM_JOB_LICENSES is not set.
-    Please request a license with your job submission using '-L gurobi:numberoflicenses'.
+    Please request a license with your job submission using '-L gurobi@slurmdb:numberoflicenses'.
     Gurobi will fail in the future if you do not add the above to your job submission.
     ```
     
@@ -60,7 +60,7 @@ When submitting jobs that use Gurobi, you need to request the appropriate number
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=8GB
-#SBATCH -L gurobi:1
+#SBATCH -L gurobi@slurmdb:1
 
 module load gurobi
 
@@ -68,7 +68,9 @@ module load gurobi
 gurobi.sh your_model.lp
 ```
 
-The `-L gurobi:1` flag requests 1 Gurobi license token. Adjust the number based on your needs, keeping in mind that there are 24 license tokens available for concurrent use.
+The `-L gurobi@slurmdb:1` flag requests 1 Gurobi license token. When this option is included, Slurm checks license availability before allocating compute resources. If no license is available, the job remains in the Licensing state until a token becomes available. Once a license is available, Slurm automatically allocates the requested compute resources and starts the job.
+
+Without the -L option, Slurm allocates compute resources immediately without checking license availability. If the Gurobi license cannot be obtained at runtime, the job will fail. Adjust the number based on your needs, keeping in mind that there are 24 license tokens available for concurrent use.
 
 
 ## Gurobi and MATLAB
