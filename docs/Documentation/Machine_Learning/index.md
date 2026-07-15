@@ -85,7 +85,7 @@ To install either PyTorch or TensorFlow for use with GPUs on Kestrel, the first 
 
 Presented below are instructions for installing TensorFlow following in the ```pip``` install instructions found here: [TensorFlow](https://www.tensorflow.org/install). For optimized TensorFlow performance, we recommend using a [containerized version of TensorFlow](Containerized_TensorFlow/index.md).
 
-Once the conda environment created above has been activated, you can install TensorFlow using the ```pip``` based approach described in [TensorFlow](https://www.tensorflow.org/install/pip), but with a couple modifications. Instead of using the ```cudatoolkit```, we recommend using the default gnu programming environment accessed using the module ```PrgEnv-gnu/8.5.0```. The ```nccl/2.21.5_cuda124``` module loads its corresponding ```cuda/12.4```. Using these modules, we install TensorFlow with the following commands: 
+You can install TensorFlow using the ```pip``` based approach described in [TensorFlow](https://www.tensorflow.org/install/pip), but with a couple modifications. Instead of using the ```cudatoolkit```, we recommend using the default gnu programming environment accessed using the module ```PrgEnv-gnu/8.5.0```. The ```nccl/2.21.5_cuda124``` module loads its corresponding ```cuda/12.4```. Using these modules, we install TensorFlow with the following commands: 
 
 ??? example "Installing TensorFlow using pip"
 	```
@@ -99,7 +99,7 @@ Once the conda environment created above has been activated, you can install Ten
 
 ### Installing PyTorch on Kestrel
 
-Once the environment has been activated, you can install PyTorch using the standard approach found under the Get Started tab of the [PyTorch](https://pytorch.org/) website, e.g., using ```pip```,
+In an activated python environment, you can install PyTorch using the standard approach found under the Get Started tab of the [PyTorch](https://pytorch.org/) website, e.g., using ```pip```,
 
 ??? example "Installing PyTorch using pip"
 	```pip3 install torch torchvision torchaudio```
