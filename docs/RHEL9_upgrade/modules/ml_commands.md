@@ -1,6 +1,6 @@
 # Module Commands Reference
 
-Lmod is the module system used on Kestrel RHEL 9. Here are the essential commands for managing modules.
+Lmod is the module system used on Kestrel RHEL9. Here are the essential commands for managing modules.
 
 ## Basic Commands
 

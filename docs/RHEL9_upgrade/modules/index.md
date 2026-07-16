@@ -1,6 +1,6 @@
 # Modules on RHEL9
 
-On Kestrel RHEL 9, modules are deployed and organized differently than on Kestrel RHEL 8. The basic concepts remain the same, but structure, discovery, and loading behavior are intentionally different to improve compatibility, reproducibility, and long-term maintainability.
+On Kestrel RHEL9, modules are deployed and organized differently than on Kestrel RHEL8. The basic concepts remain the same, but structure, discovery, and loading behavior are intentionally different to improve compatibility, reproducibility, and long-term maintainability. For any issues navigating or using the new module system, email [hpc-help@nlr.gov](mailto:hpc-help@nlr.gov).
 
 The module system on this cluster is Lmod 8.7.37, a modern Lua-based environment module system with hierarchical modules, dependency awareness, and improved error handling.
 
@@ -16,7 +16,7 @@ When you log in to Kestrel, default modules include:
 
 ## Three Environment Types
 
-On Kestrel RHEL 9, users typically work in one of these three environment types:
+On Kestrel RHEL9, users typically work in one of these three environment types:
 
 ### 1. Module-Based Environment (Site Installed Software)
 

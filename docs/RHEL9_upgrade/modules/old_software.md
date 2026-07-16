@@ -1,24 +1,24 @@
-# Testing RHEL 8 Applications on RHEL 9
+# Testing RHEL8 Applications on RHEL9
 
-As part of RHEL 8 to RHEL 9 migration, the recommended approach is to rebuild and validate applications on RHEL 9.
+As part of the migration from RHEL8 to RHEL9, the recommended approach is to rebuild and validate applications on RHEL9.
 
 ### Best Practice
 
-Rebuild the application on RHEL 9 and create a new modulefile targeting the RHEL 9 stack.
+Rebuild the application on RHEL9 and create a new modulefile targeting the RHEL9 stack.
 
-### Testing Existing RHEL 8 Builds
+### Testing Existing RHEL8 Builds
 
-For compatibility evaluation, existing RHEL 8 applications can be exposed by loading:
+For compatibility evaluation, existing RHEL8 applications can be exposed by loading:
 
 ```bash
 module load application/rhel8
 ```
 
-This extends module search paths to include software built on RHEL 8.
+This extends module search paths to include software built on RHEL8.
 
 ### Module Dependency Considerations
 
-RHEL 8 applications may rely on modules with changed names, versions, or hierarchy in RHEL 9. Some modulefiles may need updates.
+RHEL8 applications may rely on modules with changed names, versions, or hierarchy in RHEL9. Some modulefiles may need updates.
 
 Common issues:
 
@@ -48,5 +48,5 @@ After loading the application module, verify:
 - Executables are available in the user environment.
 - Basic functionality tests complete successfully.
 
-The compatibility module is a temporary mechanism. Production deployments should use software rebuilt and validated on RHEL 9.
+The compatibility module is a temporary mechanism. Production deployments should use software rebuilt and validated on RHEL9.
 
