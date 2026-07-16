@@ -85,19 +85,21 @@ To install either PyTorch or TensorFlow for use with GPUs on Kestrel, the first 
 
 Presented below are instructions for installing TensorFlow following in the ```pip``` install instructions found here: [TensorFlow](https://www.tensorflow.org/install). For optimized TensorFlow performance, we recommend using a [containerized version of TensorFlow](Containerized_TensorFlow/index.md).
 
-Once the conda environment created above has been activated, you can install TensorFlow using the ```pip``` based approach described in [TensorFlow](https://www.tensorflow.org/install/pip), but with a couple modifications. Instead of using the ```cudatoolkit```, we recommend using the nvhpc programming environment accessed using the module ```Prg-Env-nvhpc```. Also, there is a module for ```cudnn```. Using these two modules, we install TensorFlow with the following commands: 
+You can install TensorFlow using the ```pip``` based approach described in [TensorFlow](https://www.tensorflow.org/install/pip), but with a couple modifications. Instead of using the ```cudatoolkit```, we recommend using the default gnu programming environment accessed using the module ```PrgEnv-gnu/8.5.0```. The ```nccl/2.21.5_cuda124``` module loads its corresponding ```cuda/12.4```. Using these modules, we install TensorFlow with the following commands: 
 
 ??? example "Installing TensorFlow using pip"
 	```
-	module load PrgEnv-nvhpc
-	module load cudnn
-	python3 -m pip install tensorflow[and-cuda]
+	ml PrgEnv-gnu/8.5.0
+	ml anaconda3 nccl/2.21.5_cuda124
+	conda create -p ./tf-env python=3.11 pip -y
+	conda activate ./tf-env
+	pip install tensorflow[and-cuda]==2.18.0
 	```
 
 
 ### Installing PyTorch on Kestrel
 
-Once the environment has been activated, you can install PyTorch using the standard approach found under the Get Started tab of the [PyTorch](https://pytorch.org/) website, e.g., using ```pip```,
+In an activated python environment, you can install PyTorch using the standard approach found under the Get Started tab of the [PyTorch](https://pytorch.org/) website, e.g., using ```pip```,
 
 ??? example "Installing PyTorch using pip"
 	```pip3 install torch torchvision torchaudio```
@@ -254,25 +256,26 @@ Find below a simple neural network example using the MNIST data set for getting 
 
 ??? example "MNIST example"
     ```
-    import tensorflow as tf
 
-    # Select a standard data set and normalize
-    mnist = tf.keras.datasets.mnist    
-    (x_train, y_train),(x_test, y_test) = mnist.load_data()
-    x_train, x_test = x_train / 255.0, x_test / 255.0
-   
-    # Set up and compile a model 
-    model = tf.keras.models.Sequential([
-        tf.keras.layers.Flatten(input_shape=(28, 28)),	tf.keras.layers.Dense(128, activation='relu’), 
-        tf.keras.layers.Dropout(0.2), tf.keras.layers.Dense(10, activation='softmax')]) 
-    
-    model.compile(optimizer='adam’, 
-	loss='sparse_categorical_crossentropy’,	metrics=['accuracy'])
-    
-    # Fit model to training data and evaluate on test data
-    model.fit(x_train, y_train, epochs=5)
-    
-    model.evaluate(x_test, y_test)
+	import tensorflow as tf
+
+	# Select a standard data set and normalize
+	mnist = tf.keras.datasets.mnist    
+	(x_train, y_train),(x_test, y_test) = mnist.load_data()
+	x_train, x_test = x_train / 255.0, x_test / 255.0
+
+	# Set up and compile a model 
+	model = tf.keras.models.Sequential([
+    	tf.keras.layers.Flatten(input_shape=(28, 28)),  tf.keras.layers.Dense(128, activation='relu'), 
+    	tf.keras.layers.Dropout(0.2), tf.keras.layers.Dense(10, activation='softmax')]) 
+
+	model.compile(optimizer='adam', 
+	loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+	# Fit model to training data and evaluate on test data
+	model.fit(x_train, y_train, epochs=5)
+
+	model.evaluate(x_test, y_test)
     ```
 
 ### PyTorch Example
