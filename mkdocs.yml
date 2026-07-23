@@ -196,6 +196,18 @@ nav:
            - Reinforcement Learning: Documentation/Machine_Learning/Reinforcement_Learning/index.md
            - TensorBoard: Documentation/Machine_Learning/TensorBoard/index.md
            - Containerized TensorFlow: Documentation/Machine_Learning/Containerized_TensorFlow/index.md
+  - Kestrel RHEL9 Upgrade:
+      - RHEL9_upgrade/index.md 
+      - RHEL9_upgrade/access.md 
+      - Modules organization: 
+          - RHEL9_upgrade/modules/index.md 
+          - NLR-Provided Toolchains: RHEL9_upgrade/modules/user-toolchains.md
+          - Cray Programming Environment: RHEL9_upgrade/modules/cpe.md
+          - MPI-Enabled Software: RHEL9_upgrade/modules/mpi-software.md 
+          - Installing Software: RHEL9_upgrade/modules/install_software.md 
+          - Legacy Software: RHEL9_upgrade/modules/old_software.md
+          - Module Commands: RHEL9_upgrade/modules/ml_commands.md 
+      - RHEL9_upgrade/knownissues.md 
 theme:
   name: material
   custom_dir: overrides
