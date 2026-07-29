@@ -23,11 +23,4 @@ The migration from RHEL8 to RHEL9 provides the system with necessary security up
 - On RHEL8, applications were installed under `/nopt/nrel/apps/`. A new directory, `/nopt/nlr/apps`, has been created for this transition.
 - Slurm for RHEL9 is installed under `/nopt/slurm/latest` instead of `/nopt/slurm/current`.
 - The latest FastX server is running on `kd7.hpc.nlr.gov` and can be accessed with the FastX client or at <https://kd7.hpc.nlr.gov>.
-- Access to RHEL9 login and compute nodes is currently restricted. Reach out to [hpc-help@nlr.gov](mailto:hpc-help@nlr.gov) to get started on the newer software stack.
-- Recompile and install applications on the newer software stack for optimal performance, stability, and support.
-
-
-
-
-
 
