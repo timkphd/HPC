@@ -15,7 +15,7 @@ The migration from RHEL8 to RHEL9 provides the system with necessary security up
 | Red Hat Enterprise Linux | 9.4 (ESR) |
 | Kernel Release | 5.14.0-427.13.1 |
 | HPE Cray Programming Environment | 25.3 |
-| NVIDIA Driver | 565.57.01 |
+| NVIDIA Driver | 595.58.03 |
 | Slurm | 25.05.6 |
 
 ## Notes
