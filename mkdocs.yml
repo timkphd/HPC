@@ -196,6 +196,7 @@ nav:
            - Reinforcement Learning: Documentation/Machine_Learning/Reinforcement_Learning/index.md
            - TensorBoard: Documentation/Machine_Learning/TensorBoard/index.md
            - Containerized TensorFlow: Documentation/Machine_Learning/Containerized_TensorFlow/index.md
+           - LLM: Documentation/Machine_Learning/LLM/index.md
   - Kestrel RHEL9 Upgrade:
       - RHEL9_upgrade/index.md 
       - RHEL9_upgrade/access.md 
