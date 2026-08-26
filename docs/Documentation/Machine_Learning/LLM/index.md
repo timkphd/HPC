@@ -80,9 +80,11 @@ module load opencode
 opencode
 ```
 
-The first time you load the module, it generates a per-user config at `~/.cache/opencode/opencode-kestrel.json` with both providers above pre-wired and a conservative default permission policy (for example, `git push`, `chmod`, and `rm` require confirmation or are denied outright). It leaves the file untouched on subsequent loads, so any customization you make is preserved.
-
 !!! note
     OpenCode's Kestrel rules instruct it to warn you if it is about to run a local-Ollama model from a login node &mdash; that workload needs a GPU job (`salloc`/`sbatch`), not the shared login node itself. Only ServeAI Gateway models can be used through OpenCode on login nodes.
+
+After loading the module, run `opencode models <provider>` on a login node to see the LLMs available to use in OpenCode, where `<provider>` can be one of `local-ollama`  (which can be directly run on a Kestrel GPU compute node by any user) or `serveai` (one of the NLR-internal [HALO models](https://pages.github.nrel.gov/HALO/halo-docs/)).
+
+The first time you load the module, it generates a per-user config at `~/.cache/opencode/opencode-kestrel.json` with both providers above pre-wired and a conservative default permission policy (for example, `git push`, `chmod`/`chown`, and `rm` require confirmation or are denied outright). It leaves the file untouched on subsequent loads, so any customization you make is preserved.
 
 Ongoing work aims to integrate the OpenCode module with `ofa` as a provider, which would give you the entire `ofa` mode family alongside OpenCode's built-in providers in the same model picker.
