@@ -67,24 +67,48 @@ See ofa's [Bring your own agent](https://github.com/nileshsawant/onfield-assista
 
 ## OpenCode
 
-[OpenCode](https://opencode.ai) is a terminal-native, open-source AI coding agent (also available as a desktop app / IDE extension). NLR's build is enabled to talk to two kinds of models:
+[OpenCode](https://opencode.ai) is a terminal-native, open-source AI coding agent (also available as a desktop app / IDE extension). NLR's build is enabled to communicate with two kinds of models:
 
-* **ServeAI Gateway** &mdash; NLR-managed models hosted centrally on OpenStack, with no personal GPU allocation required: Devstral 2 123B, GPT-OSS 120B, Gemma 4 31B, Nemotron 3 Super 120B, and Nemotron 3 Nano 30B, all with tool-calling enabled.
-* **Local Node Model** &mdash; models you run yourself via Ollama on a GPU allocation (`gpt-oss:120b`, `gemma4:31b`), reached at `$OLLAMA_HOST` (which dynamically sets the access port by default).
-
-`module load opencode` is only available on Kestrel's GPU login nodes (`kestrel-gpu.hpc.nlr.gov`, i.e. `kl5`, which runs [RHEL9](../../../RHEL9_upgrade/index.md)) &mdash; it is not on the CPU/RHEL8 login node stack:
-
-```
-ssh kestrel-gpu.hpc.nlr.gov
-module load opencode
-opencode
-```
+* **ServeAI Gateway**: NLR-managed [HALO models](https://pages.github.nrel.gov/HALO/halo-docs/) hosted centrally on OpenStack, with no personal GPU allocation required. OpenCode currently supports access to Devstral 2 123B, GPT-OSS 120B, Gemma 4 31B, Nemotron 3 Super 120B, and Nemotron 3 Nano 30B, all with tool-calling enabled.
+* **Local Node Model**: models you run yourself via Ollama on a GPU allocation (`gpt-oss:120b`, `gemma4:31b`, `muse-glimmer:30b`), reached at `$OLLAMA_HOST` (which dynamically sets the access port by default). These models are each able to easily fit within the memory constraints of a single 80GB H100 GPU for local inference.
 
 !!! note
     OpenCode's Kestrel rules instruct it to warn you if it is about to run a local-Ollama model from a login node &mdash; that workload needs a GPU job (`salloc`/`sbatch`), not the shared login node itself. Only ServeAI Gateway models can be used through OpenCode on login nodes.
 
+### Running OpenCode on Kestrel
+
 After loading the module, run `opencode models <provider>` on a login node to see the LLMs available to use in OpenCode, where `<provider>` can be one of `local-ollama`  (which can be directly run on a Kestrel GPU compute node by any user) or `serveai` (one of the NLR-internal [HALO models](https://pages.github.nrel.gov/HALO/halo-docs/)).
 
-The first time you load the module, it generates a per-user config at `~/.cache/opencode/opencode-kestrel.json` with both providers above pre-wired and a conservative default permission policy (for example, `git push`, `chmod`/`chown`, and `rm` require confirmation or are denied outright). It leaves the file untouched on subsequent loads, so any customization you make is preserved.
+Each time you load the module, it generates a per-user config at `~/.cache/opencode/opencode.json` with both providers above pre-wired and a conservative [default permission policy](#safety-and-permissions-considerations). This configuration file is generated upon each launch so that the user is always provided the most up-to-date list of supported LLMs to access. Additionally, when running [node-local models](#compute-node-access-node-local-model-serving-and-halo-models), when OpenCode is launched, the configuration file is automatically updated with an available port through which Ollama may use for serving. 
 
 Ongoing work aims to integrate the OpenCode module with `ofa` as a provider, which would give you the entire `ofa` mode family alongside OpenCode's built-in providers in the same model picker.
+
+#### Login node access: HALO models only
+
+`module load opencode` is only available on Kestrel's GPU login node that runs [RHEL9](../../../RHEL9_upgrade/index.md) (i.e., `kl5`). OpenCode is not available on CPU nodes or any RHEL8 nodes:
+
+```
+ssh kl5.hpc.nlr.gov
+module load opencode
+opencode
+```
+
+After launching `opencode`, users may type `/models` in the interactive prompt to see the available models. Although `Ollama` (i.e., node-local) models may appear in the "Recent" list, attempting to connect to them on a login node will fail with an error. Only `ServeAI Gateway` provider models are usable when launching OpenCode from a login node.
+
+!!! note
+    Users are encouraged to use OpenCode on compute nodes instead of login nodes whenever possible.
+
+#### Compute node access: Node-local model serving and HALO models
+
+This example reflects requesting an interactive debug job for one hour to launch the `muse-glimmer:30b` model via OpenCode on a single H100 device:
+
+```
+ssh kl5.hpc.nlr.gov
+salloc -A <project-handle> -p debug -t 01:00:00 -c 32 -n 1 --mem=85G --gres=gpu:1
+module load opencode
+opencode --model muse-glimmer:30b
+```
+
+### Safety and permissions considerations
+
+The OpenCode module on Kestrel is designed to prevent the agent from mistakenly moving, deleting, or otherwise changing files on the user's behalf without the user's knowledge. To that end, the OpenCode module is deployed as a container and is given **read-only access** to Kestrel's filesystem **except for the directory from which the agent is launched**, which also has write access. Users are encouraged to keep the agent focused on the current working directory (as opposed to multiple /projects folders, for example), as it will only be able to write or modify files there. Additionally, `git push`, `chmod`/`chown`, and `rm` require confirmation from the user in each session or are denied outright.
