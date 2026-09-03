@@ -1,0 +1,36 @@
+SHELL:=/usr/bin/bash
+
+recurse:
+	module reset                ; \
+	module load cpe-stack       ; \
+	module load PrgEnv-intel    ; \
+	module load craype-x86-spr  ; \
+	export OMPF=-qopenmp        ; \
+	$(MAKE) -f $(firstword $(MAKEFILE_LIST)) run
+
+run: both srun
+
+both: exc exf tmps
+
+exf: ex1.f90 triad.o
+
+exc: ex1.c triad.o
+
+triad.o: triad.c
+	cc  -g -O3 $(OMPF) -c triad.c
+
+exf:
+	ftn -g -O3 $(OMPF)  ex1.f90 triad.o -o exf
+
+exc:
+	cc  -g -O3 $(OMPF) ex1.c triad.o -o exc
+
+clean:
+	rm -f triad.o exf exc *mod exfcray.out exccray.out
+
+tmps: 
+	rm -f *o *mod
+
+srun:
+	export OMP_NUM_THREADS=3 ; srun --threads-per-core=1 --tasks-per-node=2 --cpus-per-task=3  ./exf > exfcray.out
+	export OMP_NUM_THREADS=3 ; srun --threads-per-core=1 --tasks-per-node=2 --cpus-per-task=3  ./exc > exccray.out
