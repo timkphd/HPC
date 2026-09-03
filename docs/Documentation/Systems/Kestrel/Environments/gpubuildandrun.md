@@ -146,7 +146,7 @@ You see modules for "mixed" versions.  These are just duplicates of others and s
 
 There are a number of "helper" files  shipped with the examples.  The script *onnodes* is run while you have a job running.  You specify the jobid and it will report what is running on each node owned by the job.  This will include the core on which each task/thread is running.  On GPU nodes it will also report what you have running on each GPU.
 
-??? example "onnodes script"
+onnodes script"
 	```bash
 	[tkaiser2@kl6 h100]$ ./onnodes
 	x3102c0s41b0n0

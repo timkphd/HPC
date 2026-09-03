@@ -31,7 +31,7 @@ Once you have the client installed, you will need to configure it to connect to 
     For example:
     
     ```
-    module load forge/24.0.4
+    module load forge
     dirname $(dirname $(which map))
     /nopt/nrel/apps/cpu_stack/software/forge/24.0.4
     ```
