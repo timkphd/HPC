@@ -1,16 +1,17 @@
-: Start from a known module state, the default
+# Start from a known module state, the default
 module_restore
 
-: Load modules
+# Load modules
 #module unload PrgEnv-cray/8.5.0
 #module unload nvhpc/24.1
 
 if [ -z ${MYGCC+x} ]; then module load gcc ; else module load $MYGCC ; fi
-ml openmpi/4.1.6-nvhpc
+#ml openmpi/4.1.6-nvhpc
+ml openmpi
 ml nvhpc-nompi/24.1
 ml binutils
 
-: << ++++ 
+<< ++++ 
  Compile our program
  Here we use mpicc and mpif90.  There is support for Cuda
  but we are not using it in this case.
@@ -19,8 +20,8 @@ ml binutils
 mpicc helloc.c -o helloc
 mpif90 hellof.f90 -o hellof
 
-: We run with two tasks per nodes an two tasks on one node.
-for arg in "--tasks-per-node=2" "-n 2 --nodes=1" ; do 
+# We run with two tasks per nodes an two tasks on one node.
+for arg in "--tasks-per-node=2 -n 4 --nodes=2" "-n 2 --nodes=1 --tasks-per-node=2" ; do
    echo running Fortran version
    srun $arg hellof
    echo
