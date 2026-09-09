@@ -6,10 +6,13 @@ module reset
 ml >&2
 if [ -z ${MYGCC+x} ]; then module load gcc ; else module load $MYGCC ; fi
 
+module reset
 ml cpe-stack
 ml PrgEnv-nvidia
-ml libfabric
 ml craype-x86-genoa
+ml cudatoolkit
+ml craype-accel-nvidia90
+
 << ++++ 
  Compile our program.
  
@@ -19,7 +22,7 @@ ml craype-x86-genoa
  we get Nvidia's back end compilers.  
 ++++
 
-CC -gpu=cc90   ping_pong_cuda_staged.cu -o staged
+CC  ping_pong_cuda_staged.cu -o staged
 
 
 # We run with 2 tasks total. One 1 and two nodes

@@ -861,8 +861,9 @@ Since PrgEnv-* is compatible with slurm we launch using srun. We do a on-node an
 	
 	ml cpe-stack
 	ml PrgEnv-nvidia
-	ml libfabric
 	ml craype-x86-genoa
+	ml cudatoolkit
+	ml craype-accel-nvidia90
 	<< ++++ 
 	 Compile our program.
 	 
@@ -872,7 +873,7 @@ Since PrgEnv-* is compatible with slurm we launch using srun. We do a on-node an
 	 we get Nvidia's back end compilers.  
 	++++
 	
-	CC -gpu=cc90   ping_pong_cuda_staged.cu -o staged
+	CC  ping_pong_cuda_staged.cu -o staged
 	
 	
 	# We run with 2 tasks total. One 1 and two nodes
@@ -1112,11 +1113,42 @@ The script given below runs all three cases.
 
 ??? example "mpi/cudaaware"
 	```bash
+	# Start from a known module state, the default
+	module reset
+	
+	# Load modules
+	
+	if [ -z ${MYGCC+x} ]; then module load gcc ; else module load $MYGCC ; fi
+	
+	ml cpe-stack
+	ml PrgEnv-nvidia
+	ml craype-x86-genoa 
+	ml cudatoolkit
+	ml  craype-accel-nvidia90
+	
+	<< ++++ 
+	 Compile our program.
+	 
+	 Here we use cc and CC.  These are wrappers
+	 that point to Cray MPI but use Nvidia backend 
+	 comilers.
+	++++
+	
+	CC  ping_pong_cuda_aware.cu -o pp_cuda_aware
+	
+	export MPICH_GPU_SUPPORT_ENABLED=1
+	export MPICH_OFI_NIC_POLICY=GPU
+	srun -n 2 --nodes=1 ./pp_cuda_aware
+	srun --tasks-per-node=1 --nodes=2 ./pp_cuda_aware
+	unset MPICH_GPU_SUPPORT_ENABLED
+	unset MPICH_OFI_NIC_POLICY
+	
+	
 	module reset
 	
 	ml gcc/14.2.0
 	ml cuda/13.2
-	ml openmpi/5.0.3
+	ml openmpi/5.0.3-gpu
 	
 	<< ++++ 
 	 Compile our program.
@@ -1168,12 +1200,8 @@ The script given below runs all three cases.
 	$BPATH/mpirun $RTFLAG -N 1 pp_nvhpc 
 	
 	
-	<< SKIP
-	Support is coming  for cuda aware MPI in the 
-	next release of Intel MPI.  If you need this
-	now please contact tkaiser2@nlr.gov
 	
-	. /projects/hpcapps/intel0526/setvars.sh
+	. /nopt/nlr/apps/kestrel-cpu/software/intel/2026.1.0/setvars.sh
 	MYMPIDIR=$I_MPI_ROOT
 	IPATH=$MYMPIPATH/include
 	LPATH=$MYMPIPATH/lib
@@ -1181,8 +1209,8 @@ The script given below runs all three cases.
 	nvcc -lmpi -arch=native  ping_pong_cuda_aware.cu -o pp_cuda_aware_intel 
 	export I_MPI_OFFLOAD_MODE=cuda  
 	export I_MPI_OFFLOAD=1
-	srun -n 2 ./pp_cuda_aware_intel
-	SKIP
+	srun -n 2 --nodes=1 ./pp_cuda_aware_intel
+	srun -n 2 --tasks-per-node=1 ./pp_cuda_aware_intel
 	
 	```
 
