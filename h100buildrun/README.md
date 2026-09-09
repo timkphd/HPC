@@ -10,7 +10,7 @@ a few warnings but there should not be any errors.
 
 Any directory that has a "doit" file has a working example and will be run.  
 
-See the file about.md for more information and a description of
+See the file details.md for more information and a description of
 the compile and run options for each example.
 
 These files have been modified to work on Kestrel's RHEL9
