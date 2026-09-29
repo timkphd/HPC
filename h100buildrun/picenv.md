@@ -1,11 +1,26 @@
-If you work with linux long enough you'll someday run into "That worked yesterday but not today" or "That works for her and not for me."
+# Environment Comparisons
+
+If you work with Linux long enough you'll someday run into "That worked yesterday but not today" or "That works for her and not for me."
 
 In the first case either something changed in your user space or some installed program changed.
 
 In the second case there might be slight differences in the setup of your environments. 
 
+The python program picenv is designed to make it easy to track down differences in environments; that is the output from printenv. 
 
-The python program picenv is designed to help track down differences in environments; that is the output from printenv. The program has a unique feature.  If it instead named picmod it will by default look at modules instead of the environment; that is module avail.
+Two environment to be compared are "archived" with picenv.  Then picenv is run in a compare mode and it prints three concise lists of differences:
+1.  Variables in both environments but differ
+2.  Variables only in the first environment
+3.  Variables only in the second environment
+ 
+This is much easier than sorting through the normal output from printenv.  
+
+There is a verbose mode which prints addition details.
+
+There is also a mode for comparing module avail output.  However, loaded modules and their variables are contained in the "normal" archive.   
+
+
+The program has a unique feature.  If it is instead named picmod it will by default look at modules instead of the environment; that is module avail.
 
 If you copy picenv to some directory you can create an alias picmod to have the same program work on both environments and modules.  You create an alias like this:
 
@@ -24,11 +39,13 @@ Here is "help" from the program
 [tkaiser2@gila-compute-1 bin]$ picenv -help
 Usage:
 picenv | picmod  outfile
-     create a python pickle file containing either the module avail list or the linux environment. 
+     create a python pickle file containing either the module 
+avail list or the linux environment. 
 
-     The default output is dependent on the name of this program.  If it contains `env` the output
-     will be for the environment.  If it contains `mod` it will be a dump of `module avail`.  The
-     command line options `-e` and `-m` override the program name convention.
+     The default output is dependent on the name of this program.  If it 
+contains `env` the output will be for the environment.  If it contains `mod`
+it will be a dump of `module avail`.  The command line options `-e` and `-m` 
+override the program name convention.
 
 picenv | picmod  infile1 infile2 [-v]
      compare two files.  -v = show detailed differences
@@ -46,9 +63,11 @@ picenv | picmod  infile1 -E
 [tkaiser2@gila-compute-1 bin]$ 
 ```
 
-Without any inputs 
-    picenv - creates a file *env_dump* which is a python pickle (binary) file containing the current environment
-    picmod - creates a file *mod_dump* which is a python pickle (binary) file containing the **currently available modules**.  Note: picenv will grab the loaded modules so we don't have a separate command for this function. 
+Without any inputs:
+* picenv - creates a file *env_dump* which is a python pickle (binary) file containing the current environment
+* picmod - creates a file *mod_dump* which is a python pickle (binary) file containing the **currently available modules**.  
+
+Note: picenv will grab the loaded modules so we don't have a separate command for this function. 
     
 The pickle file is not human readable.  However, you can dump the contents of the file in text using the -d option.  For the environment the output is easier to read than from printenv.  We can also look for particular variables.  For example to get the loaded modules
 
@@ -59,7 +78,7 @@ b'LOADEDMODULES' :
 ```
 
     
-The main usage of picenv is to save environment for comparison.  Just doing printenv creates a record of your current environment but it is difficult to some other.
+Why create a non-human readable file when the started with with human readable input?  It is difficult to compare long unsorted text files containing the description of your environment.   The main usage of picenv is to save environment for comparison.  Just doing printenv creates a record of your current environment that can easily be compared to another.
 
 Here is an example.  We start with a base environment, run picenv, then load a module, run picenv again, and finally run picenv to compare the environments.
 
@@ -142,8 +161,8 @@ Finally we ran the following batch script
 
 ~/bin/picenv envbatch
 ```
-
-
+Then we can compare the environments from the interactive and batch sessions.
+```
 [tkaiser2@gila-compute-8 ~]$ picenv envinteractive envbatch
 **** In both but differ:
 b'HISTFILE'
@@ -280,4 +299,4 @@ b'SLURM_TOPOLOGY_ADDR_PATTERN'
 b'SRUN_DEBUG'
 b'TMPDIR'
 [tkaiser2@gila-compute-8 ~]$ 
- 
+```
